@@ -14298,6 +14298,9 @@ methods.addConstraintsToDomain = function (domain, environment, api) {
  * @returns {string} the trimmed string
  */
 methods.removeDotsFromProtocol = function (protocol) {
+  if (!protocol) {
+    return null;
+  }
   if (protocol[protocol.length - 1] === ':') {
     return protocol.slice(0, protocol.length - 1);
   }

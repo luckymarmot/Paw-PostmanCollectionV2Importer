@@ -21,6 +21,7 @@ export interface Request {
     url: string|Url
     description: string|null
     header: Header[]|null
+    body: Body|null
 }
 
 export interface Url {

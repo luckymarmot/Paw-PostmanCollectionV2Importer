@@ -64,8 +64,8 @@ declare class Request extends RequestTreeItem {
     readonly urlQuery: string
 
     // URL Parameters
-    urlParameters: {string:string|DynamicString}
-    getUrlParameters(isDynamic?: boolean): {string:string|DynamicString}
+    urlParameters: {[key:string]:string|DynamicString}
+    getUrlParameters(isDynamic?: boolean): {[key:string]:string|DynamicString}
     getUrlParametersArray(): KeyValue[]
     readonly urlParametersNames: string[]
     getUrlParametersNames(): string[]
@@ -80,8 +80,8 @@ declare class Request extends RequestTreeItem {
     getMethod(isDynamic?: boolean): string|DynamicString
 
     // Headers
-    headers: {string:string|DynamicString}
-    getHeaders(isDynamic?: boolean): {string:string|DynamicString}
+    headers: {[key:string]:string|DynamicString}
+    getHeaders(isDynamic?: boolean): {[key:string]:string|DynamicString}
     readonly headersNames: string[]
     getHeadersNames(): string[]
     getHeaderByName(name: string, isDynamic?: boolean): string|DynamicString|null
@@ -94,15 +94,15 @@ declare class Request extends RequestTreeItem {
     getBody(isDynamic?: boolean): string|DynamicString|null
 
     // Body (URL Encoded)
-    urlEncodedBody: {string:string|DynamicString}|null
-    getUrlEncodedBody(isDynamic?: boolean): {string:string|DynamicString}|null
+    urlEncodedBody: {[key:string]:string|DynamicString}|null
+    getUrlEncodedBody(isDynamic?: boolean): {[key:string]:string|DynamicString}|null
     getUrlEncodedBodyKeys(): string[]|null
     readonly urlEncodedBodyKeys: string[]|null
     getUrlEncodedBodyKey(key: string): string|null
 
     // Body (Multipart)
-    multipartBody: {string:string|DynamicString}|null
-    getMultipartBody(isDynamic?: boolean): {string:string|DynamicString}|null
+    multipartBody: {[key:string]:string|DynamicString}|null
+    getMultipartBody(isDynamic?: boolean): {[key:string]:string|DynamicString}|null
 
     // Body (JSON)
     jsonBody: object|null
@@ -228,7 +228,7 @@ export interface ExtensionOption {
     // NSString* LMExtensionOptionParent = @"parent";
     // NSString* LMExtensionOptionOrder = @"order";
 
-    inputs: {string:any}|null
+    inputs: {[key:string]:any}|null
     file: ExtensionImportFile|null
     hideCredentials: boolean
     parent: RequestTreeItem|null

@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-param-reassign */
 import Postman from '../types-paw-api/postman'
-import Paw, { DynamicString } from '../types-paw-api/paw'
+import Paw from '../types-paw-api/paw'
 import { getPostmanAuthParam, getPostmanHeader } from './postmanUtils'
 
 

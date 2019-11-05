@@ -197,12 +197,14 @@ declare class EnvironmentVariable {
     //
 }
 
-declare class DynamicString {
-    //
-}
+declare global {
+    class DynamicString {
+        constructor(...components: DynamicStringComponent[])
+    }
 
-declare class DynamicValue {
-    //
+    class DynamicValue {
+        constructor(identifier: string, properties?: {[key:string]:any})
+    }
 }
 
 declare class HTTPExchange {
@@ -256,6 +258,8 @@ export interface ExtensionItem {
     httpHeaders: object|null
     httpStatus: number|null
 }
+
+export type DynamicStringComponent = string | DynamicValue
 
 declare global {
     function registerImporter(importer: any): void

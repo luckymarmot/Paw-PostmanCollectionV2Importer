@@ -27,7 +27,11 @@ const config = {
     extensions: [ '.ts', '.js', '.d.ts' ],
   },
 
-  devtool: 'inline-source-map'
+  devtool: 'inline-source-map',
+
+  optimization: {
+    minimize: false
+  },
 }
 
 export default config

@@ -6,6 +6,7 @@ import Postman from './types-paw-api/postman'
 import convertBody from './lib/convertBody'
 import convertHeaders from './lib/convertHeaders'
 import convertAuth from './lib/convertAuth'
+import { makeDs } from './lib/dynamicStringUtils'
 
 
 /*
@@ -109,16 +110,19 @@ class PostmanImporter implements Paw.Importer {
     return pawRequest
   }
 
-  private convertUrl(pmUrl: string|Postman.Url): string|null {
+  private convertUrl(pmUrl: string|Postman.Url): DynamicString|null {
     if (!pmUrl) {
       return null
     }
     if (typeof pmUrl === 'string') {
-      return (pmUrl as string)
+      return makeDs(pmUrl as string, this.context)
     }
-    return (pmUrl as Postman.Url).raw
+    const { raw } = (pmUrl as Postman.Url)
+    if (!raw) {
+      return null
+    }
+    return makeDs(raw, this.context)
   }
 }
 
-// eslint-disable-next-line no-undef
 registerImporter(PostmanImporter)

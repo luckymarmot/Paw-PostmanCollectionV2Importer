@@ -23,13 +23,13 @@ declare interface OAuth1 {
     oauth_consumer_secret: string|DynamicString|null
     oauth_token: string|DynamicString|null
     oauth_token_secret: string|DynamicString|null
-    oauth_nonce: string|DynamicString|null
-    oauth_timestamp: string|DynamicString|null
-    oauth_callback: string|DynamicString|null
-    oauth_signature: string|DynamicString|null
-    oauth_signature_method: string|null
-    oauth_version: string
-    oauth_additional_parameters: string|DynamicString|null
+    oauth_nonce: string|DynamicString|null|undefined
+    oauth_timestamp: string|DynamicString|null|undefined
+    oauth_callback: string|DynamicString|null|undefined
+    oauth_signature: string|DynamicString|null|undefined
+    oauth_signature_method: string|null|undefined
+    oauth_version: string|undefined
+    oauth_additional_parameters: string|DynamicString|null|undefined
 }
 
 declare interface OAuth2 {
@@ -38,11 +38,11 @@ declare interface OAuth2 {
     authorization_uri: string|DynamicString|null
     access_token_uri: string|DynamicString|null
     redirect_uri: string|DynamicString|null
-    scope: string|DynamicString|null
-    state: string|DynamicString|null
-    token: string|DynamicString|null
-    token_prefix: string|DynamicString|null
-    grant_type: string
+    scope: string|DynamicString|null|undefined
+    state: string|DynamicString|null|undefined
+    token: string|DynamicString|null|undefined
+    token_prefix: string|DynamicString|null|undefined
+    grant_type: string|undefined
 }
 
 declare class Request extends RequestTreeItem {

@@ -5,6 +5,8 @@ import Paw from './types-paw-api/paw'
 import Postman from './types-paw-api/postman'
 import convertBody from './lib/convertBody'
 import convertHeaders from './lib/convertHeaders'
+import convertAuth from './lib/convertAuth'
+
 
 /*
  * Read Postman SDK Docs:
@@ -100,6 +102,9 @@ class PostmanImporter implements Paw.Importer {
 
     // body
     convertBody(pmRequest, pawRequest)
+
+    // auth
+    convertAuth(pmRequest, pawRequest)
 
     return pawRequest
   }

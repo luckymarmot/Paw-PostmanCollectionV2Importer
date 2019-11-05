@@ -22,6 +22,7 @@ export interface Request {
     description: string|null
     header: Header[]|null
     body: Body|null
+    auth: Auth|null
 }
 
 export interface Url {
@@ -64,4 +65,23 @@ export interface Body {
     formdata: BodyFormParameter[]|null
     file: BodyFile
     graphql: any
+}
+
+export interface AuthKeyValue {
+    key: string|null
+    value: string|null
+    type: string
+}
+
+export interface Auth {
+    type: string
+    apikey: AuthKeyValue[]|null
+    awsv4: AuthKeyValue[]|null
+    basic: AuthKeyValue[]|null
+    bearer: AuthKeyValue[]|null
+    digest: AuthKeyValue[]|null
+    hawk: AuthKeyValue[]|null
+    ntlm: AuthKeyValue[]|null
+    oauth1: AuthKeyValue[]|null
+    oauth2: AuthKeyValue[]|null
 }

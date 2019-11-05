@@ -1,0 +1,20 @@
+{
+  "name": "paw-postmancollectionv2importer",
+  "version": "0.1.0",
+  "description": "A Paw Extension to import Postman Collection 2 files into Paw",
+  "main": "src/index.js",
+  "repository": "git@github.com:luckymarmot/Paw-PostmanCollectionV2Importer.git",
+  "author": "Paw <support@paw.cloud>",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.7.0",
+    "@babel/core": "^7.7.0",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/preset-env": "^7.7.0",
+    "@babel/preset-typescript": "^7.7.0",
+    "@types/node": "^12.12.5",
+    "typescript": "^3.6.4",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  }
+}

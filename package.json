@@ -37,5 +37,8 @@
     "build": "webpack",
     "paw": "webpack && cp -r \"./dist/$npm_package_config_extension_identifier\" \"${HOME}$npm_package_config_extensions_dir\"",
     "tsc": "tsc --noEmit"
+  },
+  "dependencies": {
+    "postman-collection": "^3.5.4"
   }
 }

@@ -1,7 +1,11 @@
 /* eslint-disable class-methods-use-this */
 
-import Paw, { registerImporter } from './types-paw-api/paw'
+import Paw from './types-paw-api/paw'
 
+/*
+ * Read Postman SDK Docs:
+ * http://www.postmanlabs.com/postman-collection/
+ */
 
 class PostmanImporter implements Paw.Importer {
   static identifier = 'com.luckymarmot.PawExtensions.PostmanCollectionV2Importer'
@@ -22,8 +26,13 @@ class PostmanImporter implements Paw.Importer {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   private importItem(context: Paw.Context, item: Paw.ExtensionItem): void {
-    console.log(JSON.stringify(item))
+    const json = JSON.parse(item.content)
+    const collection = new Collection(json)
+    collection.forEachItem((item) => {
+      console.log(item)
+    })
   }
 }
 
+// eslint-disable-next-line no-undef
 registerImporter(PostmanImporter)

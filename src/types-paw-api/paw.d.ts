@@ -64,4 +64,6 @@ export interface ExtensionItem {
     httpStatus: number|null
 }
 
-declare function registerImporter(importer: any): void
+declare global {
+    function registerImporter(importer: any): void
+}

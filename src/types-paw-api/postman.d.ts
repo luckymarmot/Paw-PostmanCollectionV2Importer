@@ -33,3 +33,34 @@ export interface Header {
     disabled: boolean
     description: string|null
 }
+
+export interface BodyUrlEncodedParameter {
+    key: string|null
+    value: string|null
+    disabled: boolean
+    description: string|null
+}
+
+export interface BodyFormParameter {
+    key: string|null
+    value: string|null
+    disabled: boolean
+    type: string|null
+    contentType: string|null
+    description: string|null
+}
+
+export interface BodyFile {
+    src: string|null
+    content: string|null
+}
+
+export interface Body {
+    mode: string
+    raw: string|null
+    disabled: boolean
+    urlencoded: BodyUrlEncodedParameter[]|null
+    formdata: BodyFormParameter[]|null
+    file: BodyFile
+    graphql: any
+}

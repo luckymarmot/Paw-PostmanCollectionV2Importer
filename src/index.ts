@@ -54,11 +54,13 @@ class PostmanImporter implements Paw.Importer {
     const pawRootGroup = context.createRequestGroup((pmCollection.info ? pmCollection.info.name : null) || null)
     pmCollection.item.forEach((pmChild) => {
       const pawChild = this.convertItem(pmChild)
-      pawRootGroup.appendChild(pawChild)
+      if (pawChild) {
+        pawRootGroup.appendChild(pawChild)
+      }
     })
   }
 
-  private convertItem(pmItem: Postman.Item): Paw.RequestTreeItem {
+  private convertItem(pmItem: Postman.Item): Paw.RequestTreeItem|null {
     if (pmItem.request) {
       return this.convertRequest(pmItem)
     }
@@ -70,19 +72,34 @@ class PostmanImporter implements Paw.Importer {
     if (Array.isArray(pmItem.item)) {
       pmItem.item.forEach((pmChild) => {
         const pawChild = this.convertItem(pmChild)
-        pawGroup.appendChild(pawChild)
+        if (pawChild) {
+          pawGroup.appendChild(pawChild)
+        }
       })
     }
     return pawGroup
   }
 
-  private convertRequest(pmItem: Postman.Item): Paw.Request {
+  private convertRequest(pmItem: Postman.Item): Paw.Request|null {
+    const pmRequest = pmItem.request
+    if (!pmRequest) {
+      return null
+    }
+
     const pawRequest = this.context.createRequest(
       (pmItem.name || null),
-      (pmItem.request!.method || null),
-      this.convertUrl(pmItem.request!.url),
-      (pmItem.request!.description || null)
+      (pmRequest.method || null),
+      this.convertUrl(pmRequest.url),
+      (pmRequest.description || null)
     )
+
+    // headers
+    if (pmRequest.header) {
+      pmRequest.header.forEach((pmHeader) => {
+        this.convertHeader(pmHeader, pawRequest)
+      })
+    }
+
     return pawRequest
   }
 
@@ -94,6 +111,15 @@ class PostmanImporter implements Paw.Importer {
       return (pmUrl as string)
     }
     return (pmUrl as Postman.Url).raw
+  }
+
+  private convertHeader(pmHeader: Postman.Header, pawRequest: Paw.Request): Paw.KeyValue {
+    // @TODO support importing descriptions using RequestVariables
+    const pawHeader = pawRequest.addHeader(pmHeader.key || '', pmHeader.value || '')
+    if (pmHeader.disabled) {
+      pawHeader.enabled = false
+    }
+    return pawHeader
   }
 }
 

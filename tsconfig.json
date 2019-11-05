@@ -7,7 +7,9 @@
     "target": "es5",
     "declaration": true,
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "strictNullChecks": true,
+    "noEmit": true
   },
   "include": [
     "src/**/*"

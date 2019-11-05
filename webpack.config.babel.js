@@ -24,7 +24,7 @@ const config = {
   },
 
   resolve: {
-    extensions: [ '.ts', '.js' ],
+    extensions: [ '.ts', '.js', '.d.ts' ],
   },
 
   devtool: 'inline-source-map'

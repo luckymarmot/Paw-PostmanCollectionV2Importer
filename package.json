@@ -16,6 +16,7 @@
     "@babel/preset-typescript": "^7.7.0",
     "@babel/register": "^7.7.0",
     "@types/node": "^12.12.5",
+    "@types/postman-collection": "^3.0.3",
     "@typescript-eslint/eslint-plugin": "^2.6.1",
     "@typescript-eslint/parser": "^2.6.1",
     "babel-loader": "^8.0.6",
@@ -28,12 +29,13 @@
     "webpack-cli": "^3.3.10"
   },
   "config": {
-    "extension_name":"PostmanCollectionV2Importer",
-    "extension_identifier":"com.luckymarmot.PawExtensions.PostmanCollectionV2Importer",
-    "extensions_dir":"/Library/Containers/com.luckymarmot.Paw/Data/Library/Application Support/com.luckymarmot.Paw/Extensions"
+    "extension_name": "PostmanCollectionV2Importer",
+    "extension_identifier": "com.luckymarmot.PawExtensions.PostmanCollectionV2Importer",
+    "extensions_dir": "/Library/Containers/com.luckymarmot.Paw/Data/Library/Application Support/com.luckymarmot.Paw/Extensions"
   },
   "scripts": {
     "build": "webpack",
-    "paw": "webpack && cp -r \"./dist/$npm_package_config_extension_identifier\" \"${HOME}$npm_package_config_extensions_dir\""
+    "paw": "webpack && cp -r \"./dist/$npm_package_config_extension_identifier\" \"${HOME}$npm_package_config_extensions_dir\"",
+    "tsc": "tsc --noEmit"
   }
 }

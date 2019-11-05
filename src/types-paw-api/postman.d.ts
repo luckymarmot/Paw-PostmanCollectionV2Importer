@@ -17,11 +17,19 @@ export interface Item {
 }
 
 export interface Request {
-    method: string
+    method: string|null
     url: string|Url
     description: string|null
+    header: Header[]|null
 }
 
 export interface Url {
     raw: string|null
+}
+
+export interface Header {
+    key: string|null
+    value: string|null
+    disabled: boolean
+    description: string|null
 }

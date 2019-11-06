@@ -19,7 +19,7 @@ const makeDs = (s: string, environmentManager: EnvironmentManager): string|Dynam
     // push env variable
     components.push(environmentManager.getDynamicValue(match[1]))
 
-    idx += match.index + match[0].length
+    idx = match.index + match[0].length
   }
 
   // add remaining string

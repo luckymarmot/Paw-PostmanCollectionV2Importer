@@ -15,6 +15,7 @@
     "@babel/preset-env": "^7.7.0",
     "@babel/preset-typescript": "^7.7.0",
     "@babel/register": "^7.7.0",
+    "@types/jest": "^24.0.22",
     "@types/node": "^12.12.5",
     "@typescript-eslint/eslint-plugin": "^2.6.1",
     "@typescript-eslint/parser": "^2.6.1",
@@ -23,6 +24,8 @@
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.5.0",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.1.0",
     "typescript": "^3.6.4",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
@@ -35,7 +38,8 @@
   "scripts": {
     "build": "webpack",
     "paw": "webpack && cp -r \"./dist/$npm_package_config_extension_identifier\" \"${HOME}$npm_package_config_extensions_dir\"",
-    "tsc": "tsc --noEmit"
+    "tsc": "tsc --noEmit",
+    "test": "jest"
   },
   "dependencies": {}
 }

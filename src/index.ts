@@ -113,7 +113,7 @@ class PostmanImporter implements Paw.Importer {
     return pawRequest
   }
 
-  private convertUrl(pmUrl: string|Postman.Url): DynamicString|null {
+  private convertUrl(pmUrl: string|Postman.Url): string|DynamicString|null {
     if (!pmUrl) {
       return null
     }

@@ -229,13 +229,25 @@ declare class HTTPExchange {
 
 declare global {
     class DynamicString {
-        // @TODO definition not finished
         constructor(...components: DynamicStringComponent[])
+        length: number
+        components: DynamicStringComponent[]
+        getComponentAtIndex(index: number): DynamicStringComponent|null
+        getSimpleString(): string
+        getOnlyString(): string|null
+        getOnlyDynamicValue(): DynamicValue|null
+        getEvaluatedString(): string
+        copy(): DynamicString
+        appendString(string: string): void
+        appendDynamicValue(dynamicValue: DynamicValue): void
+        appendDynamicString(dynamicString: DynamicString): void
     }
 
     class DynamicValue {
-        // @TODO definition not finished
-        constructor(identifier: string, properties?: {[key:string]:any})
+        constructor(type: string, properties?: {[key:string]:any})
+        type: string
+        getEvaluatedString(): string
+        copy(): DynamicValue
     }
 
     class NetworkHTTPRequest {

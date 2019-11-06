@@ -4,6 +4,7 @@
 import Postman from '../types-paw-api/postman'
 import Paw from '../types-paw-api/paw'
 import { getPostmanAuthParam, getPostmanHeader } from './postmanUtils'
+import { makeDs, makeDv } from './dynamicStringUtils'
 
 
 const convertAuthApiKey = (pmAuth: Postman.Auth, pmRequest: Postman.Request, pawRequest: Paw.Request): void => {
@@ -88,6 +89,41 @@ const convertAuthOAuth2 = (pmAuth: Postman.Auth, pmRequest: Postman.Request, paw
   }
 }
 
+const convertAuthDigest = (pmAuth: Postman.Auth, pmRequest: Postman.Request, pawRequest: Paw.Request): void => {
+  if (!pmAuth.digest) {
+    return
+  }
+
+  const username = getPostmanAuthParam(pmAuth.digest, 'username')
+  const password = getPostmanAuthParam(pmAuth.digest, 'password')
+
+  const digestDv = makeDv('com.luckymarmot.PawExtensions.DigestAuthDynamicValue', {
+    username,
+    password,
+  })
+
+  pawRequest.addHeader('Authorization', makeDs(digestDv))
+}
+
+const convertAuthHawk = (pmAuth: Postman.Auth, pmRequest: Postman.Request, pawRequest: Paw.Request): void => {
+  if (!pmAuth.hawk) {
+    return
+  }
+
+  const authId = getPostmanAuthParam(pmAuth.hawk, 'authId')
+  const authKey = getPostmanAuthParam(pmAuth.hawk, 'authKey')
+  const algorithm = getPostmanAuthParam(pmAuth.hawk, 'algorithm')
+
+  const hawkDv = makeDv('uk.co.jalada.PawExtensions.HawkDynamicValue', {
+    id: authId,
+    key: authKey,
+    algorithm,
+    ext: null,
+  })
+
+  pawRequest.addHeader('Authorization', makeDs(hawkDv))
+}
+
 const convertAuth = (pmRequest: Postman.Request, pawRequest: Paw.Request): void => {
   const pmAuth = pmRequest.auth
   if (!pmAuth) {
@@ -108,6 +144,12 @@ const convertAuth = (pmRequest: Postman.Request, pawRequest: Paw.Request): void 
       break;
     case 'oauth2':
       convertAuthOAuth2(pmAuth, pmRequest, pawRequest)
+      break;
+    case 'digest':
+      convertAuthDigest(pmAuth, pmRequest, pawRequest)
+      break;
+    case 'hawk':
+      convertAuthHawk(pmAuth, pmRequest, pawRequest)
       break;
     default:
       break;

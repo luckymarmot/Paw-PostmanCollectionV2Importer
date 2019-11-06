@@ -15,10 +15,16 @@ const makeEnvDv = (variableId: string): DynamicValue => {
   })
 }
 
+const makeRequestDv = (variableId: string): DynamicValue => {
+  return makeDv('com.luckymarmot.RequestVariableDynamicValue', {
+    variableUUID: variableId
+  })
+}
+
 const makeFileDv = (): DynamicValue => {
   return makeDv('com.luckymarmot.FileContentDynamicValue', {
     bookmarkData: null
   })
 }
 
-export { makeDv, makeDs, makeEnvDv, makeFileDv }
+export { makeDv, makeDs, makeEnvDv, makeRequestDv, makeFileDv }

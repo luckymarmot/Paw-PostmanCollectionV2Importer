@@ -3,17 +3,29 @@ import Postman from '../types-paw-api/postman'
 import Paw from '../types-paw-api/paw'
 import EnvironmentManager from './EnvironmentManager'
 import convertEnvString from './convertEnvString'
+import { makeDs, makeRequestDv } from './dynamicStringUtils'
 
 
 const convertHeader = (pmHeader: Postman.Header, pawRequest: Paw.Request, environmentManager: EnvironmentManager): Paw.KeyValue => {
-  // @TODO support importing descriptions using RequestVariables
-  const pawHeader = pawRequest.addHeader(
-    convertEnvString((pmHeader.key || ''), environmentManager),
-    convertEnvString((pmHeader.value || ''), environmentManager)
-  )
+  const headerName = convertEnvString((pmHeader.key || ''), environmentManager)
+  let headerValue = convertEnvString((pmHeader.value || ''), environmentManager)
+
+  // Convert to Request Variable (if there's a description)
+  if (pmHeader.description &&
+      typeof pmHeader.description === 'string' &&
+      pmHeader.description.trim() !== '') {
+    const variable = pawRequest.addVariable(headerName as string, headerValue, pmHeader.description.trim())
+    headerValue = makeDs(makeRequestDv(variable.id))
+  }
+
+  // Add header
+  const pawHeader = pawRequest.addHeader(headerName, headerValue)
+
+  // Set disabled?
   if (pmHeader.disabled) {
     pawHeader.enabled = false
   }
+
   return pawHeader
 }
 

@@ -1,12 +1,82 @@
 /* eslint-disable max-classes-per-file */
 
+declare interface RuntimeInfo {
+    task: string
+    isMainThread: boolean
+}
+
+declare interface DocumentInfo {
+    name: string|null
+    uuid: string|null
+    isCloudProject: boolean
+    cloudProjectId: number|null
+    cloudProject: ({
+        id: number|null
+        currentCommitSha: string|null
+        currentBranch: string|null
+        mainBranch: string
+        isSynced: boolean
+    })|null
+    cloudTeam: ({
+        id: number|null
+        name: string|null
+    })|null
+}
+
+declare interface UserInfo {
+    username: string|null
+    email: string|null
+    avatar_url: string|null
+}
+
 declare class Context {
     // @TODO definition not finished
+
+    // Create
     createRequest(name?: string|null, method?: string|DynamicString|null, url?: string|DynamicString|null, description?: string|null): Request
     createRequestGroup(name: string|null): RequestGroup
     createEnvironmentDomain(name: string|null): EnvironmentDomain
     createSecureValue(name: string|null): DynamicValue
     createJSONDynamicValue(name: string|null): DynamicValue
+
+    // Get objects by name
+    getCurrentRequest(isRequired?: boolean): Request|null
+    getRequestByName(name: string): Request|null
+    getRequestGroupByName(name: string): RequestGroup|null
+    getEnvironmentDomainByName(name: string): EnvironmentDomain|null
+    getEnvironmentVariableByName(name: string): EnvironmentVariable|null
+
+    // Get objects by id
+    getRequestById(id: string): Request|null
+    getRequestGroupById(id: string): RequestGroup|null
+    getEnvironmentDomainById(id: string): EnvironmentDomain|null
+    getEnvironmentVariableById(id: string): EnvironmentVariable|null
+    getEnvironmentById(id: string): Environment|null
+
+    // Get root items
+    getRootRequests(): Request[]
+    getRootGroups(): RequestGroup[]
+    getRootRequestTreeItems(): RequestTreeItem[]
+
+    // Get all objects
+    getAllRequests(): Request[]
+    getAllGroups(): RequestGroup[]
+    getAllRequestTreeItems(): RequestTreeItem[]
+
+    // Get selected objects
+    getSelectedRequests(): Request[]
+    getSelectedGroups(): RequestGroup[]
+    getSelectedRequestTreeItems(): RequestTreeItem[]
+
+    // JSON Serialization
+    stringifyJSONItems(...items: any[]): string|null
+    parseJSONItems(json: string): any[]|null
+
+    // Info
+    runtimeInfo: RuntimeInfo
+    allowsMutation: boolean
+    document: DocumentInfo
+    user: UserInfo|null
 }
 
 declare class RequestTreeItem {
@@ -261,19 +331,11 @@ export interface Importer {
 }
 
 export interface ExtensionImportFile {
-    name: string // LMExtensionItemsFileName
-    path: string // LMExtensionItemsFilePath
+    name: string
+    path: string
 }
 
 export interface ExtensionOption {
-    // NSString* LMExtensionOptionInputs = @"inputs";
-    // NSString* LMExtensionOptionFile = @"file";
-    // NSString* LMExtensionOptionFileName = @"name";
-    // NSString* LMExtensionOptionFilePath = @"path";
-    // NSString* LMExtensionOptionObfuscateSensitiveInformation = @"hideCredentials";
-    // NSString* LMExtensionOptionParent = @"parent";
-    // NSString* LMExtensionOptionOrder = @"order";
-
     inputs: {[key:string]:any}|null
     file: ExtensionImportFile|null
     hideCredentials: boolean
@@ -282,17 +344,6 @@ export interface ExtensionOption {
 }
 
 export interface ExtensionItem {
-    // NSString* LMExtensionItemsContent = @"content";
-    // NSString* LMExtensionItemsURL = @"url";
-    // NSString* LMExtensionItemsURI = @"uri";
-    // NSString* LMExtensionItemsFile = @"file";
-    // NSString* LMExtensionItemsFileName = @"name";
-    // NSString* LMExtensionItemsFilePath = @"path";
-    // NSString* LMExtensionItemsMIMEType = @"mimeType";
-    // NSString* LMExtensionItemsHTTPHeaders = @"httpHeaders";
-    // NSString* LMExtensionItemsHTTPStatus = @"httpStatus";
-    // NSString* LMExtensionItemsName = @"name";
-
     content: string
     name: string
     uri: string

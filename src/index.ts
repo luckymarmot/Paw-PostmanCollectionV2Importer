@@ -110,6 +110,13 @@ class PostmanImporter implements Paw.Importer {
     // auth
     convertAuth(pmRequest, pawRequest, this.environmentManager)
 
+    // options
+    if (pmItem.protocolProfileBehavior) {
+      pawRequest.followRedirects = (pmItem.protocolProfileBehavior.followRedirects || false)
+      pawRequest.redirectAuthorization = (pmItem.protocolProfileBehavior.followAuthorizationHeader || false)
+      pawRequest.redirectMethod = (pmItem.protocolProfileBehavior.followOriginalHttpMethod || false)
+    }
+
     return pawRequest
   }
 

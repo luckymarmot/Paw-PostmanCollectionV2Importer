@@ -10,10 +10,17 @@ export interface CollectionInfo {
     schema: string|null
 }
 
+export interface ProtocolProfileBehavior {
+    followRedirects: boolean|null
+    followOriginalHttpMethod: boolean|null
+    followAuthorizationHeader: boolean|null
+}
+
 export interface Item {
     name: string|null
     request: Request|null
     item: Item[]|null
+    protocolProfileBehavior: ProtocolProfileBehavior|null
 }
 
 export interface Request {

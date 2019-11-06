@@ -1,4 +1,6 @@
 import Paw from '../types-paw-api/paw'
+import { makeEnvDv } from './dynamicStringUtils'
+
 
 class EnvironmentManager {
   context: Paw.Context
@@ -27,9 +29,7 @@ class EnvironmentManager {
 
   public getDynamicValue(variableName: string): DynamicValue {
     const variable = this.getEnvironmentVariable(variableName)
-    return new DynamicValue('com.luckymarmot.EnvironmentVariableDynamicValue', {
-      environmentVariable: variable.id
-    })
+    return makeEnvDv(variable.id)
   }
 
 }

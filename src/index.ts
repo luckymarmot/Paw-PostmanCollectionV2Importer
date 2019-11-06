@@ -6,7 +6,7 @@ import Postman from './types-paw-api/postman'
 import convertBody from './lib/convertBody'
 import convertHeaders from './lib/convertHeaders'
 import convertAuth from './lib/convertAuth'
-import { makeDs } from './lib/dynamicStringUtils'
+import convertEnvString from './lib/convertEnvString'
 import EnvironmentManager from './lib/EnvironmentManager'
 
 
@@ -118,13 +118,13 @@ class PostmanImporter implements Paw.Importer {
       return null
     }
     if (typeof pmUrl === 'string') {
-      return makeDs(pmUrl as string, this.environmentManager)
+      return convertEnvString(pmUrl as string, this.environmentManager)
     }
     const { raw } = (pmUrl as Postman.Url)
     if (!raw) {
       return null
     }
-    return makeDs(raw, this.environmentManager)
+    return convertEnvString(raw, this.environmentManager)
   }
 }
 

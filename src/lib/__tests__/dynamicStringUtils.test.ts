@@ -1,6 +1,6 @@
 import Paw from '../../types-paw-api/paw'
 import EnvironmentManager from '../EnvironmentManager'
-import { makeDs } from '../dynamicStringUtils'
+import convertEnvString from '../convertEnvString'
 
 
 class DummyDynamicValue {
@@ -25,7 +25,7 @@ jest.mock('../EnvironmentManager', () => {
 
 const dsMock: DynamicString = (jest.fn() as any)
 
-describe('makeDs', () => {
+describe('convertEnvString', () => {
   let environmentManager: EnvironmentManager
 
   beforeEach(() => {
@@ -42,7 +42,7 @@ describe('makeDs', () => {
     expect(dsMock).not.toBeCalled();
 
     // run
-    const ds = makeDs('', environmentManager);
+    const ds = convertEnvString('', environmentManager);
 
     // expect
     expect(ds).toStrictEqual('');
@@ -55,7 +55,7 @@ describe('makeDs', () => {
     expect(dsMock).not.toBeCalled();
 
     // run
-    const ds = makeDs('https://paw.cloud/api/v3/', environmentManager);
+    const ds = convertEnvString('https://paw.cloud/api/v3/', environmentManager);
 
     // expect
     expect(ds).toStrictEqual('https://paw.cloud/api/v3/');
@@ -68,7 +68,7 @@ describe('makeDs', () => {
     expect(dsMock).not.toBeCalled();
 
     // run
-    makeDs('{{username}}', environmentManager);
+    convertEnvString('{{username}}', environmentManager);
 
     // expect
     expect(environmentManager.getDynamicValue).toBeCalled();
@@ -87,7 +87,7 @@ describe('makeDs', () => {
     expect(dsMock).not.toBeCalled();
 
     // run
-    makeDs('{{my_var}}something-else', environmentManager);
+    convertEnvString('{{my_var}}something-else', environmentManager);
 
     // expect
     expect(environmentManager.getDynamicValue).toBeCalled();
@@ -107,7 +107,7 @@ describe('makeDs', () => {
     expect(dsMock).not.toBeCalled();
 
     // run
-    makeDs('something-else{{my_var}}', environmentManager);
+    convertEnvString('something-else{{my_var}}', environmentManager);
 
     // expect
     expect(environmentManager.getDynamicValue).toBeCalled();
@@ -127,7 +127,7 @@ describe('makeDs', () => {
     expect(dsMock).not.toBeCalled();
 
     // run
-    makeDs('https://paw.cloud/api/v3/users/{{username}}/profile', environmentManager);
+    convertEnvString('https://paw.cloud/api/v3/users/{{username}}/profile', environmentManager);
 
     // expect
     expect(environmentManager.getDynamicValue).toBeCalled();
@@ -148,7 +148,7 @@ describe('makeDs', () => {
     expect(dsMock).not.toBeCalled();
 
     // run
-    makeDs('https://paw.cloud/api/v3/users/{{username}}/{{page}}/?tab={{my_tab}}', environmentManager);
+    convertEnvString('https://paw.cloud/api/v3/users/{{username}}/{{page}}/?tab={{my_tab}}', environmentManager);
 
     // expect
     expect(environmentManager.getDynamicValue).toBeCalled();

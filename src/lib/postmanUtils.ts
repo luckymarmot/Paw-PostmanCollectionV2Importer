@@ -1,5 +1,6 @@
 import Postman from '../types-paw-api/postman'
 
+
 const getPostmanHeader = (pmRequest: Postman.Request, headerName: string): Postman.Header|null => {
   if (!pmRequest.header) {
     return null

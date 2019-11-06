@@ -105,10 +105,10 @@ class PostmanImporter implements Paw.Importer {
     convertHeaders(pmRequest, pawRequest)
 
     // body
-    convertBody(pmRequest, pawRequest)
+    convertBody(pmRequest, pawRequest, this.environmentManager)
 
     // auth
-    convertAuth(pmRequest, pawRequest)
+    convertAuth(pmRequest, pawRequest, this.environmentManager)
 
     return pawRequest
   }

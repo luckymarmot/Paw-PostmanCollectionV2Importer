@@ -3,16 +3,26 @@
 /* eslint-disable no-param-reassign */
 import Postman from '../types-paw-api/postman'
 import Paw from '../types-paw-api/paw'
-import { getPostmanAuthParam, getPostmanHeader } from './postmanUtils'
+import { getPostmanAuthParam } from './postmanUtils'
 import { makeDs, makeDv } from './dynamicStringUtils'
+import EnvironmentManager from './EnvironmentManager'
+import convertEnvString from './convertEnvString'
 
 
-const convertAuthApiKey = (pmAuth: Postman.Auth, pmRequest: Postman.Request, pawRequest: Paw.Request): void => {
+const getDynamicPostmanAuthParam = (keyValueList: Postman.AuthKeyValue[], key: string, environmentManager: EnvironmentManager): string|DynamicString|null => {
+  const val = getPostmanAuthParam(keyValueList, key)
+  if (!val) {
+    return null
+  }
+  return convertEnvString(val, environmentManager)
+}
+
+const convertAuthApiKey = (pmAuth: Postman.Auth, pmRequest: Postman.Request, pawRequest: Paw.Request, environmentManager: EnvironmentManager): void => {
   if (!pmAuth.apikey) {
     return
   }
-  const key = getPostmanAuthParam(pmAuth.apikey, 'key')
-  const value = getPostmanAuthParam(pmAuth.apikey, 'value')
+  const key = getDynamicPostmanAuthParam(pmAuth.apikey, 'key', environmentManager)
+  const value = getDynamicPostmanAuthParam(pmAuth.apikey, 'value', environmentManager)
   const whereIn = getPostmanAuthParam(pmAuth.apikey, 'in')
   if (whereIn === 'query') {
     pawRequest.addUrlParameter((key || ''), (value || ''))
@@ -22,35 +32,35 @@ const convertAuthApiKey = (pmAuth: Postman.Auth, pmRequest: Postman.Request, paw
   }
 }
 
-const convertAuthBearer = (pmAuth: Postman.Auth, pmRequest: Postman.Request, pawRequest: Paw.Request): void => {
+const convertAuthBearer = (pmAuth: Postman.Auth, pmRequest: Postman.Request, pawRequest: Paw.Request, environmentManager: EnvironmentManager): void => {
   if (!pmAuth.bearer) {
     return
   }
-  const token = getPostmanAuthParam(pmAuth.bearer, 'token')
+  const token = getDynamicPostmanAuthParam(pmAuth.bearer, 'token', environmentManager)
   pawRequest.addHeader('Authorization', `Bearer ${(token || '')}`)
 }
 
-const convertAuthBasic = (pmAuth: Postman.Auth, pmRequest: Postman.Request, pawRequest: Paw.Request): void => {
+const convertAuthBasic = (pmAuth: Postman.Auth, pmRequest: Postman.Request, pawRequest: Paw.Request, environmentManager: EnvironmentManager): void => {
   if (!pmAuth.basic) {
     return
   }
-  const username = getPostmanAuthParam(pmAuth.basic, 'username')
-  const password = getPostmanAuthParam(pmAuth.basic, 'password')
+  const username = getDynamicPostmanAuthParam(pmAuth.basic, 'username', environmentManager)
+  const password = getDynamicPostmanAuthParam(pmAuth.basic, 'password', environmentManager)
   pawRequest.httpBasicAuth = {
     username,
     password,
   }
 }
 
-const convertAuthOAuth1 = (pmAuth: Postman.Auth, pmRequest: Postman.Request, pawRequest: Paw.Request): void => {
+const convertAuthOAuth1 = (pmAuth: Postman.Auth, pmRequest: Postman.Request, pawRequest: Paw.Request, environmentManager: EnvironmentManager): void => {
   if (!pmAuth.oauth1) {
     return
   }
 
-  const consumerKey = getPostmanAuthParam(pmAuth.oauth1, 'consumerKey')
-  const consumerSecret = getPostmanAuthParam(pmAuth.oauth1, 'consumerSecret')
-  const token = getPostmanAuthParam(pmAuth.oauth1, 'token')
-  const tokenSecret = getPostmanAuthParam(pmAuth.oauth1, 'tokenSecret')
+  const consumerKey = getDynamicPostmanAuthParam(pmAuth.oauth1, 'consumerKey', environmentManager)
+  const consumerSecret = getDynamicPostmanAuthParam(pmAuth.oauth1, 'consumerSecret', environmentManager)
+  const token = getDynamicPostmanAuthParam(pmAuth.oauth1, 'token', environmentManager)
+  const tokenSecret = getDynamicPostmanAuthParam(pmAuth.oauth1, 'tokenSecret', environmentManager)
   const signatureMethod = getPostmanAuthParam(pmAuth.oauth1, 'signatureMethod')
 
   pawRequest.oauth1 = {
@@ -68,12 +78,12 @@ const convertAuthOAuth1 = (pmAuth: Postman.Auth, pmRequest: Postman.Request, paw
   }
 }
 
-const convertAuthOAuth2 = (pmAuth: Postman.Auth, pmRequest: Postman.Request, pawRequest: Paw.Request): void => {
+const convertAuthOAuth2 = (pmAuth: Postman.Auth, pmRequest: Postman.Request, pawRequest: Paw.Request, environmentManager: EnvironmentManager): void => {
   if (!pmAuth.oauth2) {
     return
   }
 
-  const accessToken = getPostmanAuthParam(pmAuth.oauth2, 'accessToken')
+  const accessToken = getDynamicPostmanAuthParam(pmAuth.oauth2, 'accessToken', environmentManager)
 
   pawRequest.oauth2 = {
     client_id: '',
@@ -89,13 +99,13 @@ const convertAuthOAuth2 = (pmAuth: Postman.Auth, pmRequest: Postman.Request, paw
   }
 }
 
-const convertAuthDigest = (pmAuth: Postman.Auth, pmRequest: Postman.Request, pawRequest: Paw.Request): void => {
+const convertAuthDigest = (pmAuth: Postman.Auth, pmRequest: Postman.Request, pawRequest: Paw.Request, environmentManager: EnvironmentManager): void => {
   if (!pmAuth.digest) {
     return
   }
 
-  const username = getPostmanAuthParam(pmAuth.digest, 'username')
-  const password = getPostmanAuthParam(pmAuth.digest, 'password')
+  const username = getDynamicPostmanAuthParam(pmAuth.digest, 'username', environmentManager)
+  const password = getDynamicPostmanAuthParam(pmAuth.digest, 'password', environmentManager)
 
   const digestDv = makeDv('com.luckymarmot.PawExtensions.DigestAuthDynamicValue', {
     username,
@@ -105,13 +115,13 @@ const convertAuthDigest = (pmAuth: Postman.Auth, pmRequest: Postman.Request, paw
   pawRequest.addHeader('Authorization', makeDs(digestDv))
 }
 
-const convertAuthHawk = (pmAuth: Postman.Auth, pmRequest: Postman.Request, pawRequest: Paw.Request): void => {
+const convertAuthHawk = (pmAuth: Postman.Auth, pmRequest: Postman.Request, pawRequest: Paw.Request, environmentManager: EnvironmentManager): void => {
   if (!pmAuth.hawk) {
     return
   }
 
-  const authId = getPostmanAuthParam(pmAuth.hawk, 'authId')
-  const authKey = getPostmanAuthParam(pmAuth.hawk, 'authKey')
+  const authId = getDynamicPostmanAuthParam(pmAuth.hawk, 'authId', environmentManager)
+  const authKey = getDynamicPostmanAuthParam(pmAuth.hawk, 'authKey', environmentManager)
   const algorithm = getPostmanAuthParam(pmAuth.hawk, 'algorithm')
 
   const hawkDv = makeDv('uk.co.jalada.PawExtensions.HawkDynamicValue', {
@@ -124,32 +134,32 @@ const convertAuthHawk = (pmAuth: Postman.Auth, pmRequest: Postman.Request, pawRe
   pawRequest.addHeader('Authorization', makeDs(hawkDv))
 }
 
-const convertAuth = (pmRequest: Postman.Request, pawRequest: Paw.Request): void => {
+const convertAuth = (pmRequest: Postman.Request, pawRequest: Paw.Request, environmentManager: EnvironmentManager): void => {
   const pmAuth = pmRequest.auth
   if (!pmAuth) {
     return
   }
   switch (pmAuth.type) {
     case 'apikey':
-      convertAuthApiKey(pmAuth, pmRequest, pawRequest)
+      convertAuthApiKey(pmAuth, pmRequest, pawRequest, environmentManager)
       break;
     case 'bearer':
-      convertAuthBearer(pmAuth, pmRequest, pawRequest)
+      convertAuthBearer(pmAuth, pmRequest, pawRequest, environmentManager)
       break;
     case 'basic':
-      convertAuthBasic(pmAuth, pmRequest, pawRequest)
+      convertAuthBasic(pmAuth, pmRequest, pawRequest, environmentManager)
       break;
     case 'oauth1':
-      convertAuthOAuth1(pmAuth, pmRequest, pawRequest)
+      convertAuthOAuth1(pmAuth, pmRequest, pawRequest, environmentManager)
       break;
     case 'oauth2':
-      convertAuthOAuth2(pmAuth, pmRequest, pawRequest)
+      convertAuthOAuth2(pmAuth, pmRequest, pawRequest, environmentManager)
       break;
     case 'digest':
-      convertAuthDigest(pmAuth, pmRequest, pawRequest)
+      convertAuthDigest(pmAuth, pmRequest, pawRequest, environmentManager)
       break;
     case 'hawk':
-      convertAuthHawk(pmAuth, pmRequest, pawRequest)
+      convertAuthHawk(pmAuth, pmRequest, pawRequest, environmentManager)
       break;
     default:
       break;

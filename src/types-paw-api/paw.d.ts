@@ -186,29 +186,61 @@ declare class RequestVariable {
 }
 
 declare class EnvironmentDomain {
-    //
+    readonly id: string
+    name: string|null
+    order: number
+
+    // variables
+    readonly variables: EnvironmentVariable[]
+    getVariableByName(name: string): EnvironmentVariable|null
+    createEnvironmentVariable(name: string): EnvironmentVariable
+
+    // environments
+    readonly environments: Environment[]
+    getEnvironmentByName(name: string): Environment|null
+    createEnvironment(name: string): Environment
 }
 
 declare class Environment {
-    //
+    readonly id: string
+    name: string|null
+    domain: EnvironmentDomain
+    order: number
+    getVariablesValues(isDynamic?: boolean): {[key:string]:string|DynamicString}
+    setVariablesValues(values: {[key:string]: string|DynamicString}): void
 }
 
 declare class EnvironmentVariable {
-    //
+    readonly id: string
+    name: string|null
+    domain: EnvironmentDomain
+    order: number
+    getCurrentValue(isDynamic?: boolean): string|DynamicString|null
+    getValue(environment: Environment, isDynamic?: boolean): string|DynamicString|null
+    setCurrentValue(value: string|DynamicString): void
+    setValue(value: string|DynamicString, environment: Environment): void
+    createDynamicValue(): DynamicValue
+    createDynamicString(): DynamicString
+}
+
+declare class HTTPExchange {
+    // @TODO definition not finished
 }
 
 declare global {
     class DynamicString {
+        // @TODO definition not finished
         constructor(...components: DynamicStringComponent[])
     }
 
     class DynamicValue {
+        // @TODO definition not finished
         constructor(identifier: string, properties?: {[key:string]:any})
     }
-}
 
-declare class HTTPExchange {
-    //
+    class NetworkHTTPRequest {
+        // @TODO definition not finished
+    }
 }
 
 export interface Importer {

@@ -1,14 +1,9 @@
 import Paw from '../types-paw-api/paw'
+import EnvironmentManager from './EnvironmentManager'
 
-
-const makeEnvDv = (): DynamicValue => {
-  return new DynamicValue('com.luckymarmot.EnvironmentVariableDynamicValue', {
-    environmentVariable: null
-  })
-}
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const makeDs = (s: string, context: Paw.Context): string|DynamicString => {
+const makeDs = (s: string, environmentManager: EnvironmentManager): string|DynamicString => {
   const re = /\{\{([^}]+)\}\}/g
   let match
   const components: Paw.DynamicStringComponent[] = []
@@ -22,8 +17,7 @@ const makeDs = (s: string, context: Paw.Context): string|DynamicString => {
     }
 
     // push env variable
-    console.log('env variable', match[1])
-    components.push(makeEnvDv())
+    components.push(environmentManager.getDynamicValue(match[1]))
 
     idx += match.index + match[0].length
   }
@@ -33,6 +27,13 @@ const makeDs = (s: string, context: Paw.Context): string|DynamicString => {
     components.push(s.substr(idx))
   }
 
+  // return
+  if (components.length === 0) {
+    return ''
+  }
+  if (components.length === 1 && typeof components[0] === 'string') {
+    return components[0]
+  }
   return new DynamicString(...components)
 }
 

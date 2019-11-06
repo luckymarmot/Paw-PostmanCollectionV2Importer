@@ -7,6 +7,7 @@ import convertBody from './lib/convertBody'
 import convertHeaders from './lib/convertHeaders'
 import convertAuth from './lib/convertAuth'
 import { makeDs } from './lib/dynamicStringUtils'
+import EnvironmentManager from './lib/EnvironmentManager'
 
 
 /*
@@ -34,6 +35,7 @@ class PostmanImporter implements Paw.Importer {
   static title = 'Postman Importer (2.0, 2.1)'
 
   context: Paw.Context
+  environmentManager: EnvironmentManager
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public canImport(context: Paw.Context, items: Paw.ExtensionItem[]): number {
@@ -43,6 +45,7 @@ class PostmanImporter implements Paw.Importer {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import(context: Paw.Context, items: Paw.ExtensionItem[], options: Paw.ExtensionOption): boolean {
     this.context = context
+    this.environmentManager = new EnvironmentManager(context)
 
     items.forEach((item) => {
       this.importCollection(context, item)
@@ -115,13 +118,13 @@ class PostmanImporter implements Paw.Importer {
       return null
     }
     if (typeof pmUrl === 'string') {
-      return makeDs(pmUrl as string, this.context)
+      return makeDs(pmUrl as string, this.environmentManager)
     }
     const { raw } = (pmUrl as Postman.Url)
     if (!raw) {
       return null
     }
-    return makeDs(raw, this.context)
+    return makeDs(raw, this.environmentManager)
   }
 }
 

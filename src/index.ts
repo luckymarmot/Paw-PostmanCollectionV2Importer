@@ -102,7 +102,7 @@ class PostmanImporter implements Paw.Importer {
     )
 
     // headers
-    convertHeaders(pmRequest, pawRequest)
+    convertHeaders(pmRequest, pawRequest, this.environmentManager)
 
     // body
     convertBody(pmRequest, pawRequest, this.environmentManager)

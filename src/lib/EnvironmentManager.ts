@@ -13,8 +13,11 @@ class EnvironmentManager {
 
   private getEnvironmentDomain(): Paw.EnvironmentDomain {
     if (!this.environmentDomain) {
-      this.environmentDomain = this.context.createEnvironmentDomain('Postman Environment')
-      this.environmentDomain.createEnvironment('Default')
+      this.environmentDomain = this.context.getEnvironmentDomainByName('Postman Environment')
+      if (!this.environmentDomain) {
+        this.environmentDomain = this.context.createEnvironmentDomain('Postman Environment')
+        this.environmentDomain.createEnvironment('Default')
+      }
     }
     return this.environmentDomain
   }

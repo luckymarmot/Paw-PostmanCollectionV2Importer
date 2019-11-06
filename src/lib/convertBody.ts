@@ -2,6 +2,7 @@
 import Postman from '../types-paw-api/postman'
 import Paw from '../types-paw-api/paw'
 import { getPostmanHeader } from './postmanUtils'
+import { makeDs, makeFileDv } from './dynamicStringUtils'
 
 
 const convertRaw = (pmBody: Postman.Body, pmRequest: Postman.Request, pawRequest: Paw.Request): void => {
@@ -43,12 +44,20 @@ const convertBodyMultipart = (pmBody: Postman.Body, pmRequest: Postman.Request, 
   }
   const pawParams: { [key:string]: string|DynamicString } = {}
   pmBody.formdata.forEach((pmParam) => {
-    // @TODO convert "file"
     const key: string = (pmParam.key || '')
-    const value: string = (pmParam.value || '')
-    pawParams[key] = value
+    if (pmParam.type === 'file') {
+      pawParams[key] = makeDs(makeFileDv())
+    }
+    else {
+      const value: string = (pmParam.value || '')
+      pawParams[key] = value
+    }
   })
   pawRequest.multipartBody = pawParams
+}
+
+const convertBodyFile = (pmBody: Postman.Body, pmRequest: Postman.Request, pawRequest: Paw.Request): void => {
+  pawRequest.body = makeDs(makeFileDv())
 }
 
 const convertBody = (pmRequest: Postman.Request, pawRequest: Paw.Request): void => {
@@ -64,6 +73,9 @@ const convertBody = (pmRequest: Postman.Request, pawRequest: Paw.Request): void 
   }
   if (pmBody.mode === 'formdata') {
     convertBodyMultipart(pmBody, pmRequest, pawRequest)
+  }
+  if (pmBody.mode === 'file') {
+    convertBodyFile(pmBody, pmRequest, pawRequest)
   }
 }
 

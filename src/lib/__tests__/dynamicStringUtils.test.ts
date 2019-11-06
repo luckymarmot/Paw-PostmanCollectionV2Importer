@@ -81,6 +81,46 @@ describe('makeDs', () => {
     ]);
   })
 
+  test('works with a starting variable', () => {
+    // check mockClear
+    expect(environmentManager.getDynamicValue).not.toBeCalled();
+    expect(dsMock).not.toBeCalled();
+
+    // run
+    makeDs('{{my_var}}something-else', environmentManager);
+
+    // expect
+    expect(environmentManager.getDynamicValue).toBeCalled();
+    expect((environmentManager.getDynamicValue as any).mock.calls[0]).toEqual([
+      'my_var'
+    ]);
+    expect(dsMock).toBeCalled();
+    expect((dsMock as any).mock.calls[0]).toEqual([
+      dummyDv('my_var'),
+      'something-else'
+    ]);
+  })
+
+  test('works with an ending variable', () => {
+    // check mockClear
+    expect(environmentManager.getDynamicValue).not.toBeCalled();
+    expect(dsMock).not.toBeCalled();
+
+    // run
+    makeDs('something-else{{my_var}}', environmentManager);
+
+    // expect
+    expect(environmentManager.getDynamicValue).toBeCalled();
+    expect((environmentManager.getDynamicValue as any).mock.calls[0]).toEqual([
+      'my_var'
+    ]);
+    expect(dsMock).toBeCalled();
+    expect((dsMock as any).mock.calls[0]).toEqual([
+      'something-else',
+      dummyDv('my_var')
+    ]);
+  })
+
   test('works with a URL string', () => {
     // check mockClear
     expect(environmentManager.getDynamicValue).not.toBeCalled();

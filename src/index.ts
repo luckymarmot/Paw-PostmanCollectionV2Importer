@@ -36,7 +36,6 @@ class PostmanImporter implements Paw.Importer {
   static title = 'Postman Importer (2.0, 2.1)'
 
   context: Paw.Context
-  environmentManager: EnvironmentManager
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public canImport(context: Paw.Context, items: Paw.ExtensionItem[]): number {
@@ -46,41 +45,45 @@ class PostmanImporter implements Paw.Importer {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import(context: Paw.Context, items: Paw.ExtensionItem[], options: Paw.ExtensionOption): boolean {
     this.context = context
-    this.environmentManager = new EnvironmentManager(context)
 
     items.forEach((item) => {
-      this.importCollection(context, item)
+      this.importCollection(item)
     })
     return true
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  private importCollection(context: Paw.Context, item: Paw.ExtensionItem): void {
+  private importCollection(item: Paw.ExtensionItem): void {
     const pmCollection = JSON.parse(item.content) as Postman.Collection
     if (!Array.isArray(pmCollection.item)) {
       throw new Error('This Postman Collection has no request')
     }
-    const pawRootGroup = context.createRequestGroup((pmCollection.info ? pmCollection.info.name : null) || null)
+
+    const name = (pmCollection.info ? pmCollection.info.name : null) || null
+    const environmentManager = new EnvironmentManager(this.context, name)
+    const pawRootGroup = this.context.createRequestGroup(name)
+
+    // import items
     pmCollection.item.forEach((pmChild) => {
-      const pawChild = this.convertItem(pmChild)
+      const pawChild = this.convertItem(pmChild, environmentManager)
       if (pawChild) {
         pawRootGroup.appendChild(pawChild)
       }
     })
   }
 
-  private convertItem(pmItem: Postman.Item): Paw.RequestTreeItem|null {
+  private convertItem(pmItem: Postman.Item, environmentManager: EnvironmentManager): Paw.RequestTreeItem|null {
     if (pmItem.request) {
-      return this.convertRequest(pmItem)
+      return this.convertRequest(pmItem, environmentManager)
     }
-    return this.convertRequestGroup(pmItem)
+    return this.convertRequestGroup(pmItem, environmentManager)
   }
 
-  private convertRequestGroup(pmItem: Postman.Item): Paw.RequestGroup {
+  private convertRequestGroup(pmItem: Postman.Item, environmentManager: EnvironmentManager): Paw.RequestGroup {
     const pawGroup = this.context.createRequestGroup(pmItem.name || null)
     if (Array.isArray(pmItem.item)) {
       pmItem.item.forEach((pmChild) => {
-        const pawChild = this.convertItem(pmChild)
+        const pawChild = this.convertItem(pmChild, environmentManager)
         if (pawChild) {
           pawGroup.appendChild(pawChild)
         }
@@ -89,13 +92,13 @@ class PostmanImporter implements Paw.Importer {
     return pawGroup
   }
 
-  private convertRequest(pmItem: Postman.Item): Paw.Request|null {
+  private convertRequest(pmItem: Postman.Item, environmentManager: EnvironmentManager): Paw.Request|null {
     const pmRequest = pmItem.request
     if (!pmRequest) {
       return null
     }
 
-    const pawUrl = convertUrl(pmRequest.url, this.environmentManager)
+    const pawUrl = convertUrl(pmRequest.url, environmentManager)
     const pawRequest = this.context.createRequest(
       (pmItem.name || null),
       (pmRequest.method || null),
@@ -104,16 +107,16 @@ class PostmanImporter implements Paw.Importer {
     )
 
     // URL params
-    convertUrlParams(pmRequest, pawRequest, this.environmentManager)
+    convertUrlParams(pmRequest, pawRequest, environmentManager)
 
     // headers
-    convertHeaders(pmRequest, pawRequest, this.environmentManager)
+    convertHeaders(pmRequest, pawRequest, environmentManager)
 
     // body
-    convertBody(pmRequest, pawRequest, this.environmentManager)
+    convertBody(pmRequest, pawRequest, environmentManager)
 
     // auth
-    convertAuth(pmRequest, pawRequest, this.environmentManager)
+    convertAuth(pmRequest, pawRequest, environmentManager)
 
     // options
     if (pmItem.protocolProfileBehavior) {

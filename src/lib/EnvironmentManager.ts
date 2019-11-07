@@ -3,19 +3,21 @@ import { makeEnvDv } from './dynamicStringUtils'
 
 
 class EnvironmentManager {
+  name: string
   context: Paw.Context
   environmentDomain: Paw.EnvironmentDomain|null
 
-  constructor(context: Paw.Context) {
+  constructor(context: Paw.Context, name?: string|null) {
+    this.name = (name || 'Postman Environment')
     this.context = context
     this.environmentDomain = null
   }
 
   private getEnvironmentDomain(): Paw.EnvironmentDomain {
     if (!this.environmentDomain) {
-      this.environmentDomain = this.context.getEnvironmentDomainByName('Postman Environment')
+      this.environmentDomain = this.context.getEnvironmentDomainByName(this.name)
       if (!this.environmentDomain) {
-        this.environmentDomain = this.context.createEnvironmentDomain('Postman Environment')
+        this.environmentDomain = this.context.createEnvironmentDomain(this.name)
         this.environmentDomain.createEnvironment('Default')
       }
     }

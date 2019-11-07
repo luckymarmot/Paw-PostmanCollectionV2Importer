@@ -1,11 +1,21 @@
-# Postman Collection 2.0 Importer for Paw
+# Postman Collection Importer for Paw
 
-A [Paw Extension](https://paw.cloud/extensions) to import Postman Collection 2 files into Paw.
+A [Paw Extension](https://paw.cloud/extensions) to import Postman Collection files to Paw.
 
 ## How to use?
 
-* In Paw, go to File menu, then Import...
-* Pick the saved Postman Collection 2.0 file, and make sure the Format is "Postman Collection 2.0 Importer"
+1. In Paw, go to File menu, then Import...
+2. Pick the saved Postman Collection file, and make sure the Format is "Postman Collection Importer"
+
+## Formats supported
+
+| Format | Support |
+| ------ | ------- |
+| Postman Collection v2.0 | ✅ |
+| Postman Collection v2.1 | ✅ |
+| Postman Collection v1.0 | ❌|
+| Postman Backup File (Dump) | ❌|
+| Postman Cloud Data (aka. *Run in Postman*) | ❌|
 
 ## License
 

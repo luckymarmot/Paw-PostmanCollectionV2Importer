@@ -15,7 +15,7 @@ import EnvironmentManager from './lib/EnvironmentManager'
 
 class PostmanImporter implements Paw.Importer {
   static identifier = 'com.luckymarmot.PawExtensions.PostmanCollectionV2Importer'
-  static title = 'Postman Importer (2.0, 2.1)'
+  static title = 'Postman Collection Importer'
 
   context: Paw.Context
 

@@ -7,6 +7,7 @@ import convertBody from './lib/convertBody'
 import convertHeaders from './lib/convertHeaders'
 import convertAuth from './lib/convertAuth'
 import convertEnvString from './lib/convertEnvString'
+import convertUrl, { convertUrlParams } from './lib/convertUrl'
 import EnvironmentManager from './lib/EnvironmentManager'
 
 
@@ -94,12 +95,16 @@ class PostmanImporter implements Paw.Importer {
       return null
     }
 
+    const pawUrl = convertUrl(pmRequest.url, this.environmentManager)
     const pawRequest = this.context.createRequest(
       (pmItem.name || null),
       (pmRequest.method || null),
-      this.convertUrl(pmRequest.url),
+      pawUrl,
       (pmRequest.description || null)
     )
+
+    // URL params
+    convertUrlParams(pmRequest, pawRequest, this.environmentManager)
 
     // headers
     convertHeaders(pmRequest, pawRequest, this.environmentManager)
@@ -118,20 +123,6 @@ class PostmanImporter implements Paw.Importer {
     }
 
     return pawRequest
-  }
-
-  private convertUrl(pmUrl: string|Postman.Url): string|DynamicString|null {
-    if (!pmUrl) {
-      return null
-    }
-    if (typeof pmUrl === 'string') {
-      return convertEnvString(pmUrl as string, this.environmentManager)
-    }
-    const { raw } = (pmUrl as Postman.Url)
-    if (!raw) {
-      return null
-    }
-    return convertEnvString(raw, this.environmentManager)
   }
 }
 

@@ -32,8 +32,15 @@ export interface Request {
     auth: Auth|null
 }
 
+export interface UrlQueryParam {
+    key: string|null
+    value: string|null
+    description: string|null
+}
+
 export interface Url {
     raw: string|null
+    query: UrlQueryParam[]|null
 }
 
 export interface Header {

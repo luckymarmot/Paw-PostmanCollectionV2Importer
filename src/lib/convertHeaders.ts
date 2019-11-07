@@ -30,11 +30,12 @@ const convertHeader = (pmHeader: Postman.Header, pawRequest: Paw.Request, enviro
 }
 
 const convertHeaders = (pmRequest: Postman.Request, pawRequest: Paw.Request, environmentManager: EnvironmentManager): void => {
-  if (pmRequest.header) {
-    pmRequest.header.forEach((pmHeader) => {
-      convertHeader(pmHeader, pawRequest, environmentManager)
-    })
+  if (!pmRequest.header || !Array.isArray(pmRequest.header)) {
+    return
   }
+  pmRequest.header.forEach((pmHeader) => {
+    convertHeader(pmHeader, pawRequest, environmentManager)
+  })
 }
 
 export default convertHeaders

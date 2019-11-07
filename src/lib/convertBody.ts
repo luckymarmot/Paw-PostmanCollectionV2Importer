@@ -8,7 +8,7 @@ import convertEnvString from './convertEnvString'
 
 
 const convertRaw = (pmBody: Postman.Body, pmRequest: Postman.Request, pawRequest: Paw.Request, environmentManager: EnvironmentManager): void => {
-  if (!pmBody.raw) {
+  if (!pmBody.raw || typeof pmBody.raw !== 'string') {
     return
   }
 
@@ -34,7 +34,7 @@ const convertRaw = (pmBody: Postman.Body, pmRequest: Postman.Request, pawRequest
 }
 
 const convertBodyUrlEncoded = (pmBody: Postman.Body, pmRequest: Postman.Request, pawRequest: Paw.Request, environmentManager: EnvironmentManager): void => {
-  if (!pmBody.urlencoded) {
+  if (!pmBody.urlencoded || !Array.isArray(pmBody.urlencoded)) {
     return
   }
   const pawParams: { [key:string]: string|DynamicString } = {}
@@ -47,7 +47,7 @@ const convertBodyUrlEncoded = (pmBody: Postman.Body, pmRequest: Postman.Request,
 }
 
 const convertBodyMultipart = (pmBody: Postman.Body, pmRequest: Postman.Request, pawRequest: Paw.Request, environmentManager: EnvironmentManager): void => {
-  if (!pmBody.formdata) {
+  if (!pmBody.formdata || !Array.isArray(pmBody.formdata)) {
     return
   }
   const pawParams: { [key:string]: string|DynamicString } = {}

@@ -51,7 +51,7 @@ const convertUrlParams = (pmRequest: Postman.Request, pawRequest: Paw.Request, e
     return
   }
   const pmUrl = (pmRequest.url as Postman.Url)
-  if (!pmUrl.query) {
+  if (!pmUrl.query || !Array.isArray(pmUrl.query)) {
     return
   }
   pmUrl.query.forEach((queryParam) => {

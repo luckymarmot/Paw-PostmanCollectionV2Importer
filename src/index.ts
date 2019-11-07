@@ -54,11 +54,20 @@ class PostmanImporter implements Paw.Importer {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   private importCollection(item: Paw.ExtensionItem): void {
-    const pmCollection = JSON.parse(item.content) as Postman.Collection
-    if (!Array.isArray(pmCollection.item)) {
-      throw new Error('This Postman Collection has no request')
+    // parse JSON
+    let pmCollection
+    try {
+      pmCollection = JSON.parse(item.content) as Postman.Collection
+    } catch (error) {
+      throw new Error('Postman Collection is not a valid JSON')
     }
 
+    // check format
+    if (!Array.isArray(pmCollection.item)) {
+      throw new Error('Postman Collection has no request')
+    }
+
+    // get name and create root group
     const name = (pmCollection.info ? pmCollection.info.name : null) || item.name || null
     const environmentManager = new EnvironmentManager(this.context, name)
     const pawRootGroup = this.context.createRequestGroup(name)

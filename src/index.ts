@@ -57,6 +57,16 @@ class PostmanImporter implements Paw.Importer {
 
     // check format
     if (!Array.isArray(pmCollection.item)) {
+      // check if it's a Postman Cloud collection
+      if (typeof (pmCollection as any).id === 'string' &&
+          typeof (pmCollection as any).name === 'string' &&
+          (pmCollection as any).folders &&
+          (pmCollection as any).requests) {
+        throw new Error('It seems like you\'re trying to import a JSON file taken from Postman Cloud. ' +
+          'This format is internal to Postman, and Paw does not support it. ' +
+          'Please import from Postman to export into Postman Collection v2 or v2.1.'
+        )
+      }
       throw new Error('Postman Collection has no request')
     }
 

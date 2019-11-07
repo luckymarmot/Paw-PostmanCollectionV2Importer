@@ -21,11 +21,22 @@ class PostmanImporter implements Paw.Importer {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public canImport(context: Paw.Context, items: Paw.ExtensionItem[]): number {
-    return 1
+    return items.reduce((acc, item) => {
+      try {
+        const pmCollection = JSON.parse(item.content) as Postman.Collection
+        return (
+          typeof pmCollection.info === 'object' &&
+          Array.isArray(pmCollection.item) &&
+          pmCollection.item.length > 0
+        )
+      } catch (error) {
+        return false
+      }
+    }, true) ? 1 : 0
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  import(context: Paw.Context, items: Paw.ExtensionItem[], options: Paw.ExtensionOption): boolean {
+  public import(context: Paw.Context, items: Paw.ExtensionItem[], options: Paw.ExtensionOption): boolean {
     this.context = context
 
     items.forEach((item) => {

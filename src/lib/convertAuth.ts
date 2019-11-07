@@ -9,7 +9,7 @@ import EnvironmentManager from './EnvironmentManager'
 import convertEnvString from './convertEnvString'
 
 
-const getDynamicPostmanAuthParam = (keyValueList: Postman.AuthKeyValue[], key: string, environmentManager: EnvironmentManager): string|DynamicString|null => {
+const getDynamicPostmanAuthParam = (keyValueList: Postman.AuthKeyValue[]|Postman.AuthParamV20, key: string, environmentManager: EnvironmentManager): string|DynamicString|null => {
   const val = getPostmanAuthParam(keyValueList, key)
   if (!val) {
     return null

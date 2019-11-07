@@ -87,15 +87,17 @@ export interface AuthKeyValue {
     type: string
 }
 
+export type AuthParamV20 = {[key:string]: string}
+
 export interface Auth {
     type: string
-    apikey: AuthKeyValue[]|null
-    awsv4: AuthKeyValue[]|null
-    basic: AuthKeyValue[]|null
-    bearer: AuthKeyValue[]|null
-    digest: AuthKeyValue[]|null
-    hawk: AuthKeyValue[]|null
-    ntlm: AuthKeyValue[]|null
-    oauth1: AuthKeyValue[]|null
-    oauth2: AuthKeyValue[]|null
+    apikey: AuthKeyValue[]|AuthParamV20|null
+    awsv4: AuthKeyValue[]|AuthParamV20|null
+    basic: AuthKeyValue[]|AuthParamV20|null
+    bearer: AuthKeyValue[]|AuthParamV20|null
+    digest: AuthKeyValue[]|AuthParamV20|null
+    hawk: AuthKeyValue[]|AuthParamV20|null
+    ntlm: AuthKeyValue[]|AuthParamV20|null
+    oauth1: AuthKeyValue[]|AuthParamV20|null
+    oauth2: AuthKeyValue[]|AuthParamV20|null
 }

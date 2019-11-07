@@ -59,7 +59,7 @@ class PostmanImporter implements Paw.Importer {
       throw new Error('This Postman Collection has no request')
     }
 
-    const name = (pmCollection.info ? pmCollection.info.name : null) || null
+    const name = (pmCollection.info ? pmCollection.info.name : null) || item.name || null
     const environmentManager = new EnvironmentManager(this.context, name)
     const pawRootGroup = this.context.createRequestGroup(name)
 

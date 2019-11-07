@@ -64,10 +64,20 @@ class PostmanImporter implements Paw.Importer {
           (pmCollection as any).requests) {
         throw new Error('It seems like you\'re trying to import a JSON file taken from Postman Cloud. ' +
           'This format is internal to Postman, and Paw does not support it. ' +
-          'Please import from Postman to export into Postman Collection v2 or v2.1.'
+          'To export in the right format, open the Postman app, and export a specific Collection in format v2 or v2.1.'
         )
       }
-      throw new Error('Postman Collection has no request')
+
+      // check if it's a Postman backup/dump
+      if (typeof (pmCollection as any).collections === 'object') {
+        throw new Error('It seems like you\'re trying to import a Postman backup file. ' +
+          'This format is internal to Postman, and Paw does not support it. ' +
+          'To export in the right format, open the Postman app, and export a specific Collection in format v2 or v2.1.'
+        )
+      }
+
+      throw new Error('This file doesn\'t seem to be a valid Postman Collection. ' +
+        'Only formats v2.0 and v2.1 are supported.')
     }
 
     // get name and create root group

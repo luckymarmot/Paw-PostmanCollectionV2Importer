@@ -1,12 +1,9 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable class-methods-use-this */
 import Paw from './types-paw-api/paw'
 import Postman from './types-paw-api/postman'
 import convertBody from './lib/convertBody'
 import convertHeaders from './lib/convertHeaders'
 import convertAuth from './lib/convertAuth'
-import convertEnvString from './lib/convertEnvString'
 import convertUrl, { convertUrlParams } from './lib/convertUrl'
 import EnvironmentManager from './lib/EnvironmentManager'
 
@@ -15,21 +12,6 @@ import EnvironmentManager from './lib/EnvironmentManager'
  * Read Postman SDK Docs:
  * http://www.postmanlabs.com/postman-collection/
  */
-
-
-// const getSafeString = (str: any): string|null => {
-//   if (str && typeof str === 'string') {
-//     return (str as string)
-//   }
-//   return null
-// }
-
-// const getNonnullString = (str: any): string => {
-//   if (str && typeof str === 'string') {
-//     return (str as string)
-//   }
-//   return ''
-// }
 
 class PostmanImporter implements Paw.Importer {
   static identifier = 'com.luckymarmot.PawExtensions.PostmanCollectionV2Importer'

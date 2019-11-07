@@ -1,5 +1,24 @@
 /* eslint-disable max-classes-per-file */
 
+/**
+ * Postman Collection format
+ *
+ * Schemas
+ * https://schema.getpostman.com/
+ *
+ * v2.1.0
+ * https://schema.getpostman.com/collection/json/v2.1.0/draft-07/docs/index.html
+ * 
+ * v2.0.0
+ * https://schema.getpostman.com/collection/json/v2.0.0/draft-07/docs/index.html
+ *
+ * Differences between format 2.0.0 and 2.1.0:
+ * https://github.com/postmanlabs/postman-collection/issues/635#issuecomment-389057960
+ *
+ * Official examples:
+ * https://github.com/postmanlabs/postman-collection/tree/develop/examples
+ */
+
 export interface Collection {
     info: CollectionInfo|null
     item: Item[]|null

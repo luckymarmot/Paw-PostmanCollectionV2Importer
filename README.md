@@ -1,5 +1,7 @@
 # Postman Collection Importer for Paw
 
+![Travis CI Status](https://travis-ci.org/luckymarmot/Paw-PostmanCollectionV2Importer.svg?branch=master)
+
 A [Paw Extension](https://paw.cloud/extensions) to import Postman Collection files to Paw.
 
 ## How to use?

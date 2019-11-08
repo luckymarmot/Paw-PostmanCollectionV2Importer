@@ -1,0 +1,17 @@
+{
+    "info": {
+        "name": "HTTP Status Messages",
+        "id": "my-collection-id",
+        "_postman_schema": "https://schema.getpostman.com/#2.0.0",
+        "version": {
+            "major": "2",
+            "minor": "0",
+            "patch": "0",
+            "prerelease": "draft.1"
+        }
+    },
+    "item": "invalid file",
+    "protocolProfileBehavior": {
+        "disableBodyPruning": false
+    }
+}

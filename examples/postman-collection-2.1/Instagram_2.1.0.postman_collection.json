@@ -1,0 +1,838 @@
+{
+	"info": {
+		"_postman_id": "61d57b3b-95a2-4945-a9b0-d4ea0cf505a3",
+		"name": "Instagram",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get recent media from a custom geo-id.",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.instagram.com/v1/geographies/vortals/media/recent?count=-27499704&min_id=technologies",
+					"protocol": "https",
+					"host": [
+						"api",
+						"instagram",
+						"com"
+					],
+					"path": [
+						"v1",
+						"geographies",
+						"vortals",
+						"media",
+						"recent"
+					],
+					"query": [
+						{
+							"key": "count",
+							"value": "-27499704"
+						},
+						{
+							"key": "min_id",
+							"value": "technologies"
+						}
+					]
+				},
+				"description": "Get recent media from a geography subscription that you created.\n\n**Note:** You can only access Geographies that were explicitly created by your OAuth client. Check the\nGeography Subscriptions section of the [real-time updates page](https://instagram.com/developer/realtime/).\nWhen you create a subscription to some geography that you define, you will be returned a unique `geo-id` that\ncan be used in this query. To backfill photos from the location covered by this geography, use the\n[media search endpoint](https://instagram.com/developer/endpoints/media/).\n\n**Warning:** [Deprecated](http://instagram.com/developer/changelog/) for Apps created **on or after** Nov 17, 2015\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Search for a location by geographic coordinate.",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.instagram.com/v1/locations/search?distance=-78926248&facebook_places_id=e-tailers&foursquare_id=systems&lat=82203608.99030492&lng=19387622.137996808&foursquare_v2_id=web services",
+					"protocol": "https",
+					"host": [
+						"api",
+						"instagram",
+						"com"
+					],
+					"path": [
+						"v1",
+						"locations",
+						"search"
+					],
+					"query": [
+						{
+							"key": "distance",
+							"value": "-78926248"
+						},
+						{
+							"key": "facebook_places_id",
+							"value": "e-tailers"
+						},
+						{
+							"key": "foursquare_id",
+							"value": "systems"
+						},
+						{
+							"key": "lat",
+							"value": "82203608.99030492"
+						},
+						{
+							"key": "lng",
+							"value": "19387622.137996808"
+						},
+						{
+							"key": "foursquare_v2_id",
+							"value": "web services"
+						}
+					]
+				},
+				"description": "Search for a location by geographic coordinate."
+			},
+			"response": []
+		},
+		{
+			"name": "Get information about a location.",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.instagram.com/v1/locations/mindshare",
+					"protocol": "https",
+					"host": [
+						"api",
+						"instagram",
+						"com"
+					],
+					"path": [
+						"v1",
+						"locations",
+						"mindshare"
+					]
+				},
+				"description": "Get information about a location."
+			},
+			"response": []
+		},
+		{
+			"name": "Get a list of recent media objects from a given location.",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.instagram.com/v1/locations/networks/media/recent?min_timestamp=-22858872&max_timestamp=80505607&min_id=infomediaries&max_id=eyeballs",
+					"protocol": "https",
+					"host": [
+						"api",
+						"instagram",
+						"com"
+					],
+					"path": [
+						"v1",
+						"locations",
+						"networks",
+						"media",
+						"recent"
+					],
+					"query": [
+						{
+							"key": "min_timestamp",
+							"value": "-22858872"
+						},
+						{
+							"key": "max_timestamp",
+							"value": "80505607"
+						},
+						{
+							"key": "min_id",
+							"value": "infomediaries"
+						},
+						{
+							"key": "max_id",
+							"value": "eyeballs"
+						}
+					]
+				},
+				"description": "Get a list of recent media objects from a given location."
+			},
+			"response": []
+		},
+		{
+			"name": "Get a list of currently popular media.",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.instagram.com/v1/media/popular",
+					"protocol": "https",
+					"host": [
+						"api",
+						"instagram",
+						"com"
+					],
+					"path": [
+						"v1",
+						"media",
+						"popular"
+					]
+				},
+				"description": "Get a list of what media is most popular at the moment. Can return mix of `image` and `video` types.\n\n**Warning:** [Deprecated](http://instagram.com/developer/changelog/) for Apps created **on or after** Nov 17, 2015\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Search for media in a given area.",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.instagram.com/v1/media/search?lat=-57592369.263935916&lng=92224539.15034992&min_timestamp=-24784359&max_timestamp=97186170&distance=-93517290",
+					"protocol": "https",
+					"host": [
+						"api",
+						"instagram",
+						"com"
+					],
+					"path": [
+						"v1",
+						"media",
+						"search"
+					],
+					"query": [
+						{
+							"key": "lat",
+							"value": "-57592369.263935916"
+						},
+						{
+							"key": "lng",
+							"value": "92224539.15034992"
+						},
+						{
+							"key": "min_timestamp",
+							"value": "-24784359"
+						},
+						{
+							"key": "max_timestamp",
+							"value": "97186170"
+						},
+						{
+							"key": "distance",
+							"value": "-93517290"
+						}
+					]
+				},
+				"description": "Search for media in a given area. The default time span is set to 5 days. The time span must not exceed 7 days.\nDefaults time stamps cover the last 5 days. Can return mix of `image` and `video` types.\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Get information about a media object.",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.instagram.com/v1/media/shortcode/niches",
+					"protocol": "https",
+					"host": [
+						"api",
+						"instagram",
+						"com"
+					],
+					"path": [
+						"v1",
+						"media",
+						"shortcode",
+						"niches"
+					]
+				},
+				"description": "This endpoint returns the same response as `GET /media/{media-id}`.\n\nA media object's shortcode can be found in its shortlink URL. An example shortlink is\n`http://instagram.com/p/D/`, its corresponding shortcode is `D`.\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Get information about a media object.",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.instagram.com/v1/media/synergies",
+					"protocol": "https",
+					"host": [
+						"api",
+						"instagram",
+						"com"
+					],
+					"path": [
+						"v1",
+						"media",
+						"synergies"
+					]
+				},
+				"description": "Get information about a media object. The returned type key will allow you to differentiate between image and\nvideo media.\n\n**Note:** if you authenticate with an OAuth Token, you will receive the user_has_liked key which quickly tells\nyou whether the current user has liked this media item.\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Get a list of recent comments on a media object.",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.instagram.com/v1/media/niches/comments",
+					"protocol": "https",
+					"host": [
+						"api",
+						"instagram",
+						"com"
+					],
+					"path": [
+						"v1",
+						"media",
+						"niches",
+						"comments"
+					]
+				},
+				"description": "Get a list of recent comments on a media object."
+			},
+			"response": []
+		},
+		{
+			"name": "Create a comment on a media object.",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://api.instagram.com/v1/media/systems/comments?text=markets",
+					"protocol": "https",
+					"host": [
+						"api",
+						"instagram",
+						"com"
+					],
+					"path": [
+						"v1",
+						"media",
+						"systems",
+						"comments"
+					],
+					"query": [
+						{
+							"key": "text",
+							"value": "markets"
+						}
+					]
+				},
+				"description": "Create a comment on a media object with the following rules:\n\n  * The total length of the comment cannot exceed 300 characters.\n  * The comment cannot contain more than 4 hashtags.\n  * The comment cannot contain more than 1 URL.\n  * The comment cannot consist of all capital letters.\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Remove a comment.",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://api.instagram.com/v1/media/e-services/comments/e-commerce",
+					"protocol": "https",
+					"host": [
+						"api",
+						"instagram",
+						"com"
+					],
+					"path": [
+						"v1",
+						"media",
+						"e-services",
+						"comments",
+						"e-commerce"
+					]
+				},
+				"description": "Remove a comment either on the authenticated user's media object or authored by the authenticated user.\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Remove a like on this media by the current user.",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://api.instagram.com/v1/media/deliverables/likes",
+					"protocol": "https",
+					"host": [
+						"api",
+						"instagram",
+						"com"
+					],
+					"path": [
+						"v1",
+						"media",
+						"deliverables",
+						"likes"
+					]
+				},
+				"description": "Remove a like on this media by the currently authenticated user."
+			},
+			"response": []
+		},
+		{
+			"name": "Get a list of users who have liked this media.",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.instagram.com/v1/media/partnerships/likes",
+					"protocol": "https",
+					"host": [
+						"api",
+						"instagram",
+						"com"
+					],
+					"path": [
+						"v1",
+						"media",
+						"partnerships",
+						"likes"
+					]
+				},
+				"description": "Get a list of users who have liked this media."
+			},
+			"response": []
+		},
+		{
+			"name": "Set a like on this media by the current user.",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://api.instagram.com/v1/media/solutions/likes",
+					"protocol": "https",
+					"host": [
+						"api",
+						"instagram",
+						"com"
+					],
+					"path": [
+						"v1",
+						"media",
+						"solutions",
+						"likes"
+					]
+				},
+				"description": "Set a like on this media by the currently authenticated user."
+			},
+			"response": []
+		},
+		{
+			"name": "Search for tags by name.",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.instagram.com/v1/tags/search?q=methodologies",
+					"protocol": "https",
+					"host": [
+						"api",
+						"instagram",
+						"com"
+					],
+					"path": [
+						"v1",
+						"tags",
+						"search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "methodologies"
+						}
+					]
+				},
+				"description": "Search for tags by name."
+			},
+			"response": []
+		},
+		{
+			"name": "Get information about a tag object.",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.instagram.com/v1/tags/bandwidth",
+					"protocol": "https",
+					"host": [
+						"api",
+						"instagram",
+						"com"
+					],
+					"path": [
+						"v1",
+						"tags",
+						"bandwidth"
+					]
+				},
+				"description": "Get information about a tag object."
+			},
+			"response": []
+		},
+		{
+			"name": "Get a list of recently tagged media.",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.instagram.com/v1/tags/platforms/media/recent?count=-26871893&min_tag_id=platforms&max_tag_id=metrics",
+					"protocol": "https",
+					"host": [
+						"api",
+						"instagram",
+						"com"
+					],
+					"path": [
+						"v1",
+						"tags",
+						"platforms",
+						"media",
+						"recent"
+					],
+					"query": [
+						{
+							"key": "count",
+							"value": "-26871893"
+						},
+						{
+							"key": "min_tag_id",
+							"value": "platforms"
+						},
+						{
+							"key": "max_tag_id",
+							"value": "metrics"
+						}
+					]
+				},
+				"description": "Get a list of recently tagged media. Use the `max_tag_id` and `min_tag_id` parameters in the pagination\nresponse to paginate through these objects.\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Search for a user by name.",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.instagram.com/v1/users/search?q=synergies&count=-4718395",
+					"protocol": "https",
+					"host": [
+						"api",
+						"instagram",
+						"com"
+					],
+					"path": [
+						"v1",
+						"users",
+						"search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "synergies"
+						},
+						{
+							"key": "count",
+							"value": "-4718395"
+						}
+					]
+				},
+				"description": "Search for a user by name."
+			},
+			"response": []
+		},
+		{
+			"name": "See the authenticated user's feed.",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.instagram.com/v1/users/self/feed?count=-88948082&min_id=relationships&max_id=initiatives",
+					"protocol": "https",
+					"host": [
+						"api",
+						"instagram",
+						"com"
+					],
+					"path": [
+						"v1",
+						"users",
+						"self",
+						"feed"
+					],
+					"query": [
+						{
+							"key": "count",
+							"value": "-88948082"
+						},
+						{
+							"key": "min_id",
+							"value": "relationships"
+						},
+						{
+							"key": "max_id",
+							"value": "initiatives"
+						}
+					]
+				},
+				"description": "See the authenticated user's feed.\n\n**Warning:** [Deprecated](http://instagram.com/developer/changelog/) for Apps created **on or after** Nov 17, 2015\n"
+			},
+			"response": []
+		},
+		{
+			"name": "See the list of media liked by the authenticated user.",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.instagram.com/v1/users/self/media/liked?count=56184569&max_like_id=relationships",
+					"protocol": "https",
+					"host": [
+						"api",
+						"instagram",
+						"com"
+					],
+					"path": [
+						"v1",
+						"users",
+						"self",
+						"media",
+						"liked"
+					],
+					"query": [
+						{
+							"key": "count",
+							"value": "56184569"
+						},
+						{
+							"key": "max_like_id",
+							"value": "relationships"
+						}
+					]
+				},
+				"description": "See the list of media liked by the authenticated user. Private media is returned as long as the authenticated\nuser has permission to view that media. Liked media lists are only available for the currently authenticated\nuser.\n"
+			},
+			"response": []
+		},
+		{
+			"name": "List the users who have requested this user's permission to follow.",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.instagram.com/v1/users/self/requested-by",
+					"protocol": "https",
+					"host": [
+						"api",
+						"instagram",
+						"com"
+					],
+					"path": [
+						"v1",
+						"users",
+						"self",
+						"requested-by"
+					]
+				},
+				"description": "List the users who have requested this user's permission to follow."
+			},
+			"response": []
+		},
+		{
+			"name": "Get basic information about a user.",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.instagram.com/v1/users/interfaces",
+					"protocol": "https",
+					"host": [
+						"api",
+						"instagram",
+						"com"
+					],
+					"path": [
+						"v1",
+						"users",
+						"interfaces"
+					]
+				},
+				"description": "Get basic information about a user. To get information about the owner of the access token, you can use\n**self** instead of the `user-id`.\n\nSecurity scope `public_content` is required to read information about other users.\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Get the list of users this user is followed by.",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.instagram.com/v1/users/portals/followed-by",
+					"protocol": "https",
+					"host": [
+						"api",
+						"instagram",
+						"com"
+					],
+					"path": [
+						"v1",
+						"users",
+						"portals",
+						"followed-by"
+					]
+				},
+				"description": "Get the list of users this user is followed by. To get users followed by the owner of the access token, you\ncan use **self** instead of the `user-id`.\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Get the list of users this user follows.",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.instagram.com/v1/users/content/follows",
+					"protocol": "https",
+					"host": [
+						"api",
+						"instagram",
+						"com"
+					],
+					"path": [
+						"v1",
+						"users",
+						"content",
+						"follows"
+					]
+				},
+				"description": "Get the list of users this user follows. To get follows of the owner of the access token, you can use **self**\ninstead of the `user-id`.\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Get the most recent media published by a user.",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.instagram.com/v1/users/solutions/media/recent?count=82581405&max_timestamp=-1473212&min_timestamp=-30287476&min_id=synergies&max_id=paradigms",
+					"protocol": "https",
+					"host": [
+						"api",
+						"instagram",
+						"com"
+					],
+					"path": [
+						"v1",
+						"users",
+						"solutions",
+						"media",
+						"recent"
+					],
+					"query": [
+						{
+							"key": "count",
+							"value": "82581405"
+						},
+						{
+							"key": "max_timestamp",
+							"value": "-1473212"
+						},
+						{
+							"key": "min_timestamp",
+							"value": "-30287476"
+						},
+						{
+							"key": "min_id",
+							"value": "synergies"
+						},
+						{
+							"key": "max_id",
+							"value": "paradigms"
+						}
+					]
+				},
+				"description": "Get the most recent media published by a user. To get the most recent media published by the owner of the\naccess token, you can use **self** instead of the `user-id`.\n\nSecurity scope `public_content` is required to read information about other users.\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Get information about a relationship to another user.",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.instagram.com/v1/users/users/relationship",
+					"protocol": "https",
+					"host": [
+						"api",
+						"instagram",
+						"com"
+					],
+					"path": [
+						"v1",
+						"users",
+						"users",
+						"relationship"
+					]
+				},
+				"description": "Get information about a relationship to another user."
+			},
+			"response": []
+		},
+		{
+			"name": "Modify the relationship between the current user and the target user.",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://api.instagram.com/v1/users/metrics/relationship?action=unblock",
+					"protocol": "https",
+					"host": [
+						"api",
+						"instagram",
+						"com"
+					],
+					"path": [
+						"v1",
+						"users",
+						"metrics",
+						"relationship"
+					],
+					"query": [
+						{
+							"key": "action",
+							"value": "unblock"
+						}
+					]
+				},
+				"description": "Modify the relationship between the current user and the target user."
+			},
+			"response": []
+		}
+	]
+}

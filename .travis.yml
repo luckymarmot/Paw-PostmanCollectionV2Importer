@@ -1,0 +1,11 @@
+language: node_js
+cache:
+  yarn: true
+  directories:
+    - node_modules
+env:
+  - TEST_CMD=build
+  - TEST_CMD=tsc
+  - TEST_CMD=test
+script:
+  - yarn run ${TEST_CMD}

@@ -1,0 +1,492 @@
+{
+	"version": 1,
+	"collections": [
+		{
+			"id": "12d41805-edc1-4b82-994b-a10ea4f7f06d",
+			"name": "Swagger Petstore",
+			"description": "A sample API that uses a petstore as an example to demonstrate features in the OpenAPI 3.0 specification\n\nContact Support:\n Name: Swagger API Team\n Email: apiteam@swagger.io",
+			"auth": null,
+			"events": [],
+			"variables": [
+				{
+					"id": "baseUrl",
+					"key": "baseUrl",
+					"value": "http://petstore.swagger.io/api",
+					"type": "string",
+					"disabled": false
+				}
+			],
+			"order": [],
+			"folders_order": [
+				"875e3f9e-785d-4ed2-a53e-ea8d0b81f90a"
+			],
+			"protocolProfileBehavior": {},
+			"folders": [
+				{
+					"id": "875e3f9e-785d-4ed2-a53e-ea8d0b81f90a",
+					"name": "pets",
+					"description": null,
+					"auth": null,
+					"events": null,
+					"collection": "12d41805-edc1-4b82-994b-a10ea4f7f06d",
+					"folder": null,
+					"order": [
+						"1e855496-136d-4d7f-83d7-104269a25ad0",
+						"8353cec5-afba-4f5e-8511-879d1bbea7a2"
+					],
+					"folders_order": [
+						"bdc06660-6211-473f-8566-da51a4ac9c68"
+					],
+					"protocolProfileBehavior": {},
+					"collectionId": "12d41805-edc1-4b82-994b-a10ea4f7f06d",
+					"folderId": "875e3f9e-785d-4ed2-a53e-ea8d0b81f90a"
+				}
+			],
+			"requests": [
+				{
+					"id": "1e855496-136d-4d7f-83d7-104269a25ad0",
+					"name": "find Pets",
+					"url": "{{baseUrl}}/pets?tags=<string>,<string>&limit=<integer>",
+					"description": "Returns all pets from the system that the user has access to\nNam sed condimentum est. Maecenas tempor sagittis sapien, nec rhoncus sem sagittis sit amet. Aenean at gravida augue, ac iaculis sem. Curabitur odio lorem, ornare eget elementum nec, cursus id lectus. Duis mi turpis, pulvinar ac eros ac, tincidunt varius justo. In hac habitasse platea dictumst. Integer at adipiscing ante, a sagittis ligula. Aenean pharetra tempor ante molestie imperdiet. Vivamus id aliquam diam. Cras quis velit non tortor eleifend sagittis. Praesent at enim pharetra urna volutpat venenatis eget eget mauris. In eleifend fermentum facilisis. Praesent enim enim, gravida ac sodales sed, placerat id erat. Suspendisse lacus dolor, consectetur non augue vel, vehicula interdum libero. Morbi euismod sagittis libero sed lacinia.\n\nSed tempus felis lobortis leo pulvinar rutrum. Nam mattis velit nisl, eu condimentum ligula luctus nec. Phasellus semper velit eget aliquet faucibus. In a mattis elit. Phasellus vel urna viverra, condimentum lorem id, rhoncus nibh. Ut pellentesque posuere elementum. Sed a varius odio. Morbi rhoncus ligula libero, vel eleifend nunc tristique vitae. Fusce et sem dui. Aenean nec scelerisque tortor. Fusce malesuada accumsan magna vel tempus. Quisque mollis felis eu dolor tristique, sit amet auctor felis gravida. Sed libero lorem, molestie sed nisl in, accumsan tempor nisi. Fusce sollicitudin massa ut lacinia mattis. Sed vel eleifend lorem. Pellentesque vitae felis pretium, pulvinar elit eu, euismod sapien.\n",
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [
+						{
+							"key": "tags",
+							"value": "<string>,<string>",
+							"description": "tags to filter by"
+						},
+						{
+							"key": "limit",
+							"value": "<integer>",
+							"description": "maximum number of results to return"
+						}
+					],
+					"auth": {
+						"type": "noauth"
+					},
+					"events": null,
+					"folder": "875e3f9e-785d-4ed2-a53e-ea8d0b81f90a",
+					"responses": [
+						{
+							"id": "7b5f1470-c926-4f88-a819-63e2fb4be108",
+							"name": "pet response",
+							"status": "OK",
+							"mime": "",
+							"language": "json",
+							"text": "[\n {\n  \"name\": \"<string>\",\n  \"tag\": \"<string>\",\n  \"id\": \"<long>\"\n },\n {\n  \"name\": \"<string>\",\n  \"tag\": \"<string>\",\n  \"id\": \"<long>\"\n }\n]",
+							"responseCode": {
+								"code": 200,
+								"name": "OK",
+								"detail": ""
+							},
+							"requestObject": {
+								"id": "fc6bca70-9c7b-4dae-94d8-f37850d357b8",
+								"method": "GET",
+								"headers": "",
+								"pathVariables": {},
+								"url": "{{baseUrl}}/pets?tags=<string>,<string>&limit=<integer>",
+								"pathVariableData": [],
+								"queryParams": [
+									{
+										"key": "tags",
+										"value": "<string>,<string>"
+									},
+									{
+										"key": "limit",
+										"value": "<integer>"
+									}
+								],
+								"headerData": [],
+								"dataMode": null,
+								"data": null
+							},
+							"headers": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookies": [],
+							"request": "1e855496-136d-4d7f-83d7-104269a25ad0",
+							"collection": "12d41805-edc1-4b82-994b-a10ea4f7f06d"
+						},
+						{
+							"id": "ed08bdd2-e01c-45f4-bfa4-858492818010",
+							"name": "unexpected error",
+							"status": "Internal Server Error",
+							"mime": "",
+							"language": "json",
+							"text": "{\n \"code\": \"<integer>\",\n \"message\": \"<string>\"\n}",
+							"responseCode": {
+								"code": 500,
+								"name": "Internal Server Error",
+								"detail": ""
+							},
+							"requestObject": {
+								"id": "db30cce6-b43f-4676-9b5c-1ac70c8e7d24",
+								"method": "GET",
+								"headers": "",
+								"pathVariables": {},
+								"url": "{{baseUrl}}/pets?tags=<string>,<string>&limit=<integer>",
+								"pathVariableData": [],
+								"queryParams": [
+									{
+										"key": "tags",
+										"value": "<string>,<string>"
+									},
+									{
+										"key": "limit",
+										"value": "<integer>"
+									}
+								],
+								"headerData": [],
+								"dataMode": null,
+								"data": null
+							},
+							"headers": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookies": [],
+							"request": "1e855496-136d-4d7f-83d7-104269a25ad0",
+							"collection": "12d41805-edc1-4b82-994b-a10ea4f7f06d"
+						}
+					],
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "12d41805-edc1-4b82-994b-a10ea4f7f06d",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "33137778-5878-40a3-a7bc-67d3bacfe86d",
+					"name": "find pet by id",
+					"url": "{{baseUrl}}/pets/:id",
+					"description": "Returns a user based on a single ID, if the user does not have access to the pet",
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "GET",
+					"pathVariableData": [
+						{
+							"key": "id",
+							"value": "<long>",
+							"description": "ID of pet to fetch"
+						}
+					],
+					"queryParams": [],
+					"auth": {
+						"type": "noauth"
+					},
+					"events": null,
+					"folder": "bdc06660-6211-473f-8566-da51a4ac9c68",
+					"responses": [
+						{
+							"id": "91c77bb2-a3b7-496e-96ff-a141b6608989",
+							"name": "unexpected error",
+							"status": "Internal Server Error",
+							"mime": "",
+							"language": "json",
+							"text": "{\n \"code\": \"<integer>\",\n \"message\": \"<string>\"\n}",
+							"responseCode": {
+								"code": 500,
+								"name": "Internal Server Error",
+								"detail": ""
+							},
+							"requestObject": {
+								"id": "5cffe835-871f-46bd-a91c-9908056aba0f",
+								"method": "GET",
+								"headers": "",
+								"pathVariables": {},
+								"url": "{{baseUrl}}/pets/<long>",
+								"pathVariableData": [],
+								"queryParams": [],
+								"headerData": [],
+								"dataMode": null,
+								"data": null
+							},
+							"headers": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookies": [],
+							"request": "33137778-5878-40a3-a7bc-67d3bacfe86d",
+							"collection": "12d41805-edc1-4b82-994b-a10ea4f7f06d"
+						},
+						{
+							"id": "96d10159-d457-410f-a76e-aa95ff6f4e17",
+							"name": "pet response",
+							"status": "OK",
+							"mime": "",
+							"language": "json",
+							"text": "{\n \"name\": \"<string>\",\n \"tag\": \"<string>\",\n \"id\": \"<long>\"\n}",
+							"responseCode": {
+								"code": 200,
+								"name": "OK",
+								"detail": ""
+							},
+							"requestObject": {
+								"id": "01f4d0fd-6f86-4b75-885f-70fdfb6433ce",
+								"method": "GET",
+								"headers": "",
+								"pathVariables": {},
+								"url": "{{baseUrl}}/pets/<long>",
+								"pathVariableData": [],
+								"queryParams": [],
+								"headerData": [],
+								"dataMode": null,
+								"data": null
+							},
+							"headers": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookies": [],
+							"request": "33137778-5878-40a3-a7bc-67d3bacfe86d",
+							"collection": "12d41805-edc1-4b82-994b-a10ea4f7f06d"
+						}
+					],
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "12d41805-edc1-4b82-994b-a10ea4f7f06d",
+					"headers": "",
+					"pathVariables": {
+						"id": "<long>"
+					}
+				},
+				{
+					"id": "3f4e2868-a403-4e12-bbd1-9fe09b5514a6",
+					"name": "delete Pet",
+					"url": "{{baseUrl}}/pets/:id",
+					"description": "deletes a single pet based on the ID supplied",
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [
+						{
+							"key": "asdf",
+							"value": "asdafd",
+							"description": "asdf",
+							"type": "text",
+							"enabled": true
+						}
+					],
+					"method": "DELETE",
+					"pathVariableData": [
+						{
+							"key": "id",
+							"value": "<long>",
+							"description": "ID of pet to delete"
+						}
+					],
+					"queryParams": [],
+					"auth": {
+						"type": "noauth"
+					},
+					"events": null,
+					"folder": "bdc06660-6211-473f-8566-da51a4ac9c68",
+					"responses": [
+						{
+							"id": "3001108d-a1c0-44b3-b18b-5645fc103e62",
+							"name": "pet deleted",
+							"status": "No Content",
+							"mime": "",
+							"language": "text",
+							"text": "",
+							"responseCode": {
+								"code": 204,
+								"name": "No Content",
+								"detail": ""
+							},
+							"requestObject": {
+								"id": "ee0ba6f9-6c38-4859-a408-2d7ee96b0ada",
+								"method": "DELETE",
+								"headers": "",
+								"pathVariables": {},
+								"url": "{{baseUrl}}/pets/<long>",
+								"pathVariableData": [],
+								"queryParams": [],
+								"headerData": [],
+								"dataMode": null,
+								"data": null
+							},
+							"headers": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookies": [],
+							"request": "3f4e2868-a403-4e12-bbd1-9fe09b5514a6",
+							"collection": "12d41805-edc1-4b82-994b-a10ea4f7f06d"
+						},
+						{
+							"id": "553b0c5a-65e4-4093-b6ec-ec9b7c428e9f",
+							"name": "unexpected error",
+							"status": "Internal Server Error",
+							"mime": "",
+							"language": "json",
+							"text": "{\n \"code\": \"<integer>\",\n \"message\": \"<string>\"\n}",
+							"responseCode": {
+								"code": 500,
+								"name": "Internal Server Error",
+								"detail": ""
+							},
+							"requestObject": {
+								"id": "cb178b89-cc95-4e4c-bd09-039f99e283c0",
+								"method": "DELETE",
+								"headers": "",
+								"pathVariables": {},
+								"url": "{{baseUrl}}/pets/<long>",
+								"pathVariableData": [],
+								"queryParams": [],
+								"headerData": [],
+								"dataMode": null,
+								"data": null
+							},
+							"headers": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookies": [],
+							"request": "3f4e2868-a403-4e12-bbd1-9fe09b5514a6",
+							"collection": "12d41805-edc1-4b82-994b-a10ea4f7f06d"
+						}
+					],
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "12d41805-edc1-4b82-994b-a10ea4f7f06d",
+					"headers": "asdf: asdafd\n",
+					"pathVariables": {
+						"id": "<long>"
+					}
+				},
+				{
+					"id": "8353cec5-afba-4f5e-8511-879d1bbea7a2",
+					"name": "add Pet",
+					"url": "{{baseUrl}}/pets",
+					"description": "Creates a new pet in the store.  Duplicates are allowed",
+					"data": [],
+					"dataOptions": null,
+					"dataMode": "raw",
+					"headerData": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"method": "POST",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": {
+						"type": "noauth"
+					},
+					"events": null,
+					"folder": "875e3f9e-785d-4ed2-a53e-ea8d0b81f90a",
+					"responses": [
+						{
+							"id": "b0747605-475f-4010-b080-d41f4d51286d",
+							"name": "pet response",
+							"status": "OK",
+							"mime": "",
+							"language": "json",
+							"text": "{\n \"name\": \"<string>\",\n \"tag\": \"<string>\",\n \"id\": \"<long>\"\n}",
+							"responseCode": {
+								"code": 200,
+								"name": "OK",
+								"detail": ""
+							},
+							"requestObject": {
+								"id": "448d1321-87fa-476b-9de4-332280417213",
+								"method": "POST",
+								"headers": "Content-Type: application/json",
+								"dataMode": "raw",
+								"pathVariables": {},
+								"url": "{{baseUrl}}/pets",
+								"pathVariableData": [],
+								"queryParams": [],
+								"headerData": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"data": [],
+								"rawModeData": "{\n    \"name\": \"<string>\",\n    \"tag\": \"<string>\"\n}"
+							},
+							"headers": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookies": [],
+							"request": "8353cec5-afba-4f5e-8511-879d1bbea7a2",
+							"collection": "12d41805-edc1-4b82-994b-a10ea4f7f06d"
+						},
+						{
+							"id": "c18f888b-9edf-4472-8b29-1d186f4ce044",
+							"name": "unexpected error",
+							"status": "Internal Server Error",
+							"mime": "",
+							"language": "json",
+							"text": "{\n \"code\": \"<integer>\",\n \"message\": \"<string>\"\n}",
+							"responseCode": {
+								"code": 500,
+								"name": "Internal Server Error",
+								"detail": ""
+							},
+							"requestObject": {
+								"id": "e28a5e9b-3e69-4ac7-9bb0-130f7b9aeff4",
+								"method": "POST",
+								"headers": "Content-Type: application/json",
+								"dataMode": "raw",
+								"pathVariables": {},
+								"url": "{{baseUrl}}/pets",
+								"pathVariableData": [],
+								"queryParams": [],
+								"headerData": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"data": [],
+								"rawModeData": "{\n    \"name\": \"<string>\",\n    \"tag\": \"<string>\"\n}"
+							},
+							"headers": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookies": [],
+							"request": "8353cec5-afba-4f5e-8511-879d1bbea7a2",
+							"collection": "12d41805-edc1-4b82-994b-a10ea4f7f06d"
+						}
+					],
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "12d41805-edc1-4b82-994b-a10ea4f7f06d",
+					"rawModeData": "{\n    \"name\": \"<string>\",\n    \"tag\": \"<string>\"\n}",
+					"headers": "Content-Type: application/json\n",
+					"pathVariables": {}
+				}
+			]
+		}
+	]
+}

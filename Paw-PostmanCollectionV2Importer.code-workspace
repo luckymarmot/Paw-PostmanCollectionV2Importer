@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		// enable eslint checking and fixing in both `.ts` and `.tsx` files
+		"eslint.validate": [
+			"javascript",
+			"javascriptreact",
+			{
+				"language": "typescript",
+				"autoFix": true
+			},
+			{
+				"language": "typescriptreact",
+				"autoFix": true
+			}
+		],
+		"editor.tabSize": 2
+	}
+}

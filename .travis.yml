@@ -2,10 +2,22 @@ language: node_js
 cache:
   yarn: true
   directories:
-    - node_modules
+  - node_modules
 env:
-  - TEST_CMD=build
-  - TEST_CMD=tsc
-  - TEST_CMD=test
+- TEST_CMD=build
+- TEST_CMD=tsc
+- TEST_CMD=test
 script:
-  - yarn run ${TEST_CMD}
+- yarn run ${TEST_CMD}
+before_deploy:
+- yarn run archive
+deploy:
+  provider: releases
+  api_key:
+    secure: aY8hdbBqIwhqfvBgiR+8uKz9c8LNiK7MbX8gNAO+LONLAs0ZsRmTiEAlhe5e+BxmBZTpsaS6gYi4vCipH7U68RdE7VWVTDPaEzFXwczI2FeJZ0nQqsfdI3Jl7sa0VVf0GrvZfHcENV5Ad1fY0No45ZTuonOQyO64xT2ybguZVg/4i6ql7BVwAXd4K8voXPEX9eBJYHNRYbEfbp9zu5YEfbDTiH0zrFZgWed1TNXU0TVduaYsHQA4gWSLC2hWMrqFis7wUh4NPA+PximxZogv0nhejYJP/iE5LVOskCj+WFuHIY5vHp+ieonhJwXxFHBUw8yzwWfdc7Xm9FbOWldjNbgQQYmeMfiycszJY85O/07rGGgSbsCoW+Cl7T8o9PECe+371xcMbaSeA1qQRzHphQg4aL1aYTUxA1RdQ9GEvQ5f2YSsJ9ADwIMoG5BuJbf/YUgyeqrj7l2AH8TN+k2tETTghG8k3s7d/8fv2YagZ792PWF36UUvzDl+agzu9r92M6CA/yaqWV0Y/7mQpHKuL9afXtOn5UGZyXoTrOirhllRs2EI11BMw5XNfq5++1RXFYWe1WGzRcz/4cUwc+/N4t7rsOc5b50DSVE/jAIiwxdomSTUNdmJc9qO7AZUGjjx/oPwCAAr7r4aBM9WE15dAM0kkB0beSGKFrMr2ZIXqbw=
+  file: dist/PostmanCollectionV2Importer.zip
+  skip_cleanup: true
+  on:
+    tags: true
+    all_branches: true
+    repo: luckymarmot/Paw-PostmanCollectionV2Importer
